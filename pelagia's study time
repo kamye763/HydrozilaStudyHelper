@@ -1,0 +1,146 @@
+
+# ----------------- Login and Accounts -----------------
+
+import json
+import os
+import getpass
+
+DB_FILE = "user_database.json"
+
+# ----------------- User DB Functions -----------------
+
+def load_users():
+    if os.path.exists(DB_FILE):
+        with open(DB_FILE, 'r') as f:
+            return json.load(f)
+    return {}
+
+def save_users(users):
+    with open(DB_FILE, 'w') as f:
+        json.dump(users, f, indent=4)
+
+# ----------------- Registration -----------------
+
+def register():
+    users = load_users()
+    username = input("Enter a new username: ")
+    if username in users:
+        print(f"Error: Username '{username}' already exists.")
+        return
+
+    password = getpass.getpass("Enter a password: ")
+    confirm_password = getpass.getpass("Confirm your password: ")
+    if password != confirm_password:
+        print("Error: Passwords do not match.")
+        return
+
+    grade = input("Enter grade (7-9): ")
+    while grade not in ["7", "8", "9"]:
+        print("Invalid selection. Try again.")
+        grade = input("Enter grade (7-9): ")
+
+    users[username] = {"password": password, "grade": grade}
+    save_users(users)
+    print(f"Account for '{username}' in grade {grade} created successfully!")
+
+# ----------------- Login -----------------
+
+def login():
+    users = load_users()
+    username = input("Enter your username: ")
+    password = getpass.getpass("Enter your password: ")
+
+    if username in users and users[username]["password"] == password:
+        print(f"Welcome, {username}! Login successful.")
+        user_grade = users[username]["grade"]
+        main_app_menu(user_grade)
+    else:
+        print("Error: Invalid username or password.")
+
+# ----------------- Helpers -----------------
+
+def list_pdfs(folder_path):
+    if not os.path.exists(folder_path):
+        return []
+    return [f for f in os.listdir(folder_path) if f.lower().endswith(".pdf")]
+
+def open_subject_menu(grade, subject_folder, subject_name):
+    print(f"\n--- {subject_name} Menu (Grade {grade}) ---")
+
+    folder = os.path.join("resources", f"grade{grade}", subject_folder)
+    pdfs = list_pdfs(folder)
+
+    if not pdfs:
+        print("No resources found for this subject yet.")
+        return
+
+    print("Available files:")
+    for i, pdf in enumerate(pdfs, 1):
+        print(f"{i}. {pdf}")
+    print("B. Back")
+
+    choice = input("Choose a file to open: ").lower()
+
+    if choice == 'b':
+        return
+
+    if choice.isdigit():
+        index = int(choice) - 1
+        if 0 <= index < len(pdfs):
+            path = os.path.join(folder, pdfs[index])
+            print(f"Opening {path}...")
+            os.startfile(path)
+        else:
+            print("Invalid choice.")
+    else:
+        print("Invalid input.")
+
+# ----------------- Subject Menus -----------------
+
+def main_app_menu(grade):
+    while True:
+        print("\n--- Main Menu ---")
+        print("Subjects available:")
+        print("M - Math")
+        print("E - English")
+        print("I - Inter/Sci")
+        print("S - Swahili")
+        print("Q - Quit")
+        choice = input("Choose a subject: ").lower()
+
+        if choice == 'm':
+            open_subject_menu(grade, "math", "Math")
+        elif choice == 'e':
+            open_subject_menu(grade, "english", "English")
+        elif choice == 'i':
+            open_subject_menu(grade, "inter_sci", "Inter/Sci")
+        elif choice == 's':
+            open_subject_menu(grade, "swahili", "Swahili")
+        elif choice == 'q':
+            print("Logging out. Goodbye!")
+            break
+        else:
+            print("Invalid choice. Try again.")
+
+# ----------------- Entry Point -----------------
+
+def start_menu():
+    while True:
+        print("\n--- Welcome ---")
+        print("R - Register")
+        print("L - Login")
+        print("Q - Quit")
+        choice = input("Choose an option: ").lower()
+
+        if choice == 'r':
+            register()
+        elif choice == 'l':
+            login()
+        elif choice == 'q':
+            print("Goodbye!")
+            break
+        else:
+            print("Invalid choice. Try again.")
+
+if __name__ == "__main__":
+    start_menu()
