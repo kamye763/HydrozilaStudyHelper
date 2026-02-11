@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>hydrozoa</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+ 
+<h1>🪼 hydrozoa - Grade 8 🦈</h1>
+
+<div class="progress-container">
+    <div id="progress-bar"></div>
+</div>
+
+<form id="quiz">
+
+{% for q in questions %}
+<div class="question-box">
+    <h3>{{ q.question }}</h3>
+
+    {% if q.section == "A" %}
+        {% for choice in q.choices %}
+            <label>
+                <input type="radio" name="{{ q.id }}" value="{{ choice }}">
+                {{ choice }}
+            </label><br>
+        {% endfor %}
+    {% else %}
+        <input type="text" name="{{ q.id }}">
+    {% endif %}
+</div>
+{% endfor %}
+
+<button type="button" onclick="submitQuiz()">Finish Game 🐢</button>
+</form>
+
+<div id="results"></div>
+
+<script>
+function submitQuiz() {
+    let answers = {};
+    let form = document.getElementById("quiz");
+    let inputs = form.elements;
+
+    for (let i = 0; i < inputs.length; i++) {
+        if (inputs[i].name) {
+            answers[inputs[i].name] = inputs[i].value;
+        }
+    }
+
+    fetch("/check", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(answers)
+    })
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById("progress-bar").style.width = data.score + "%";
+
+        let output = `<h2>Your Score: ${data.score}</h2>`;
+        output += `<h3>📘 Review & Notes</h3>`;
+
+        data.feedback.forEach(f => {
+            output += `
+            <div class="note">
+                <p><b>Question:</b> ${f.question}</p>
+                <p><b>Your Answer:</b> ${f.your_answer}</p>
+                <p><b>Correct Answer:</b> ${f.correct_answer}</p>
+                <p><b>Explanation:</b> ${f.explanation}</p>
+            </div>`;
+        });
+
+        document.getElementById("results").innerHTML = output;
+    });
+}
+</script>
+
+</body>
+</html>
+<div id="boss-fight" style="display:none">
+    <h2>🦈 SHARK BOSS CHALLENGE!</h2>
+
+    <p id="boss-question"></p>
+
+    <input type="text" id="boss-answer">
+    <button onclick="submitBoss()">Attack Shark!</button>
+
+    <p>⏱️ Time left: <span id="timer">20</span>s</p>
+</div>
+<script>
+let timeLeft = 20;
+let timerInterval;
+
+function startBossFight(question) {
+    document.getElementById("boss-question").innerText = question;
+    document.getElementById("boss-fight").style.display = "block";
+
+    timeLeft = 20;
+    document.getElementById("timer").innerText = timeLeft;
+
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        document.getElementById("timer").innerText = timeLeft;
+
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            alert("🦈 Shark escaped! You lost a life.");
+        }
+    }, 1000);
+}
+
+function submitBoss() {
+    clearInterval(timerInterval);
+
+    fetch("/boss", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            level: "Level 1",
+            answer: document.getElementById("boss-answer").value
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            alert("🎉 Shark defeated! +30 points");
+        } else {
+            alert("❌ Wrong!\n\nExplanation:\n" + data.explanation);
+        }
+    });
+}
+</script>
+<script>
+    function addTask() {
+      const input = document.getElementById("taskInput");
+      const taskText = input.value.trim();
+      if (taskText === "") return;
+    }
+</script>
+<div class="ocean">
+
+    <div class="jellyfish">🪼</div>
+    <div class="turtle">🐢</div>
+    <div class="stingray">🐟</div>
+    <div class="shark">🦈</div>
+
+</div>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ocean Math Adventure</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<h1>🪼 Ocean Math Adventure - Grade 8 CBC</h1>
+
+<div class="progress">
+    <div id="progress-bar"></div>
+</div>
+
+<form id="quiz">
+{% for q in questions %}
+<div class="box">
+    <h3>{{ q.question }}</h3>
+
+    {% if q.section == "A" %}
+        {% for c in q.choices %}
+            <label>
+                <input type="radio" name="{{ q.id }}" value="{{ c }}">
+                {{ c }}
+            </label><br>
+        {% endfor %}
+    {% else %}
+        <input type="text" name="{{ q.id }}">
+    {% endif %}
+</div>
+{% endfor %}
+
+<button type="button" onclick="submitQuiz()">Finish Game 🐢</button>
+</form>
+
+<!-- BOSS FIGHT -->
+<div id="boss" style="display:none">
+    <h2>🦈 SHARK BOSS QUESTION!</h2>
+    <p>Find the LCM of 6 and 9</p>
+    <input type="text" id="boss-answer">
+    <button onclick="submitBoss()">Attack Shark!</button>
+    <p>⏱️ Time left: <span id="time">20</span>s</p>
+</div>
+
+<div id="result"></div>
+
+<!-- OCEAN CHARACTERS -->
+<div class="ocean">
+    <div class="jellyfish">🪼</div>
+    <div class="turtle">🐢</div>
+    <div class="stingray">🐟</div>
+    <div class="shark">🦈</div>
+</div>
+
+<script>
+let timer;
+
+function submitQuiz() {
+    let data = {};
+    document.querySelectorAll("input").forEach(i => {
+        if (i.name) data[i.name] = i.value;
+    });
+
+    fetch("/submit", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(data)
+    })
+    .then(r => r.json())
+    .then(d => {
+        document.getElementById("progress-bar").style.width = d.score + "%";
+        document.getElementById("boss").style.display = "block";
+        startTimer();
+
+        let out = `<h2>Score: ${d.score}</h2><h3>📘 Review</h3>`;
+        d.feedback.forEach(f => {
+            out += `<p><b>${f.question}</b><br>
+                    Your answer: ${f.your_answer}<br>
+                    Correct: ${f.correct_answer}<br>
+                    Explanation: ${f.explanation}</p>`;
+        });
+        document.getElementById("result").innerHTML = out;
+    });
+}
+
+function startTimer() {
+    timer = setInterval(() => {
+        timeLeft--;
+        document.getElementById("time").innerText = timeLeft;
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            alert("⏱️ Time up! Shark wins!");
+        }
+    }, 1000);
+}
+
+function submitBoss() {
+    clearInterval(timer);
+    fetch("/boss", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            answer: document.getElementById("boss-answer").value
+        })
+    })
+    .then(r => r.json())
+    .then(d => {
+        alert(d.success ? "🎉 Shark defeated!" : "❌ " + d.explanation);
+    });
+}
+</script>
+
+<link rel="stylesheet" href="/static/style.css">
+{% for q in questions %}
+    <p>{{ q.q }}</p>
+    <input name="{{ q.id }}">
+{% endfor %}
+
+<style>
+    body {
+    background: linear-gradient(#003366, #001a33);
+    color: white;
+    font-family: Arial;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.question-box {
+    background: rgba(0,0,0,0.4);
+    padding: 15px;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+button {
+    background: #00ccff;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.progress-container {
+    background: #444;
+    height: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+#progress-bar {
+    height: 100%;
+    width: 0%;
+    background: #00ffcc;
+    border-radius: 10px;
+}
+
+.note {
+    background: #022;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+}
+#boss-fight {
+    background: radial-gradient(circle, #002244, #000);
+    padding: 20px;
+    border: 3px solid red;
+    border-radius: 15px;
+    animation: shake 0.3s infinite alternate;
+}
+
+@keyframes shake {
+    from { transform: translateX(-5px); }
+    to { transform: translateX(5px); }
+}
+.ocean {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+.jellyfish {
+    position: absolute;
+    left: 5%;
+    top: 50%;
+    font-size: 50px;
+    animation: floatUpDown 4s ease-in-out infinite;
+}
+
+@keyframes floatUpDown {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-30px); }
+    100% { transform: translateY(0); }
+}
+.turtle {
+    position: absolute;
+    bottom: 20%;
+    left: -60px;
+    font-size: 50px;
+    animation: swimTurtle 20s linear infinite;
+}
+
+@keyframes swimTurtle {
+    0% { left: -60px; }
+    100% { left: 110%; }
+}
+.stingray {
+    position: absolute;
+    top: 30%;
+    left: -50px;
+    font-size: 45px;
+    animation: glideRay 15s linear infinite;
+}
+
+@keyframes glideRay {
+    0% {
+        left: -50px;
+        top: 40%;
+    }
+    100% {
+        left: 110%;
+        top: 20%;
+    }
+}
+.shark {
+    position: absolute;
+    top: 60%;
+    left: 110%;
+    font-size: 70px;
+    animation: sharkAttack 8s linear infinite;
+}
+
+@keyframes sharkAttack {
+    0% {
+        left: 110%;
+        transform: scaleX(-1);
+    }
+    50% {
+        left: 50%;
+    }
+    100% {
+        left: -120px;
+        transform: scaleX(1);
+    }
+}
+body {
+    background: linear-gradient(#003366, #001a33);
+    color: white;
+    font-family: Arial;
+    padding: 20px;
+}
+
+.box {
+    background: rgba(0,0,0,0.4);
+    padding: 15px;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+button {
+    background: #00ccff;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.progress {
+    background: #444;
+    height: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+#progress-bar {
+    height: 100%;
+    width: 0%;
+    background: #00ffcc;
+    border-radius: 10px;
+}
+
+.ocean {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+}
+
+.jellyfish {
+    position: absolute;
+    left: 5%;
+    top: 50%;
+    font-size: 50px;
+    animation: float 4s infinite;
+}
+
+@keyframes float {
+    50% { transform: translateY(-30px); }
+}
+
+.turtle {
+    position: absolute;
+    bottom: 20%;
+    left: -60px;
+    font-size: 50px;
+    animation: swim 20s linear infinite;
+}
+
+@keyframes swim {
+    to { left: 110%; }
+}
+
+.stingray {
+    position: absolute;
+    top: 30%;
+    left: -50px;
+    font-size: 45px;
+    animation: glide 15s linear infinite;
+}
+
+@keyframes glide {
+    to { left: 110%; top: 20%; }
+}
+
+.shark {
+    position: absolute;
+    top: 60%;
+    right: 10%;
+    font-size: 70px;
+}
+
+
+ </style>
+</body>
+</html>
+<!DOCTYPE html>
+<html>
