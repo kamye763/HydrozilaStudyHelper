@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <style>
+
+       .shark {
+    position: absolute;
+    top: 60%;
+    right: 10%;
+    font-size: 70px;
+}
+
+#progress-bar {
+    height: 100%;
+    width: 0%;
+    background: #00ffcc;
+    border-radius: 10px;
+}
+
+.ocean {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+}
+
+.shark {
+    position: absolute;
+    top: 60%;
+    left: 110%;
+    font-size: 70px;
+    animation: sharkAttack 8s linear infinite;
+}
+
+@keyframes sharkAttack {
+    0% {
+        left: 110%;
+        transform: scaleX(-1);
+    }
+    50% {
+        left: 50%;
+    }
+    100% {
+        left: -120px;
+        transform: scaleX(1);
+    }
+}
+body {
+    background: linear-gradient(#003366, #001a33);
+    color: white;
+    font-family: Arial;
+    padding: 20px;
+}
+
+
+
+    </style>
+
+<script>
+function startTimer() {
+    timer = setInterval(() => {
+        timeLeft--;
+        document.getElementById("time").innerText = timeLeft;
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            alert("⏱️ Time up! Shark wins!");
+        }
+    }, 1000);
+}
+
+function submitBoss() {
+    clearInterval(timer);
+    fetch("/boss", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            answer: document.getElementById("boss-answer").value
+        })
+    })
+    .then(r => r.json())
+    .then(d => {
+        alert(d.success ? "🎉 Shark defeated!" : "❌ " + d.explanation);
+    });
+}
+</script>
+
+<link rel="stylesheet" href="/static/style.css">
+{% for q in questions %}
+    <p>{{ q.q }}</p>
+    <input name="{{ q.id }}">
+{% endfor %}
+</script>
+
+</html>
