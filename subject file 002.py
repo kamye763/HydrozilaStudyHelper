@@ -160,7 +160,102 @@ QUESTIONS = {
             ]
         }
     }
+},
+
+"AGRICULTURE": {
+    "Grade 7": {
+        "Crop Production": {
+            "Types of Crops": [
+                {"q":"Maize is a type of?","o":["Cereal","Fruit","Flower","Root"],"a":"Cereal"},
+                {"q":"Beans are classified as?","o":["Legumes","Cereals","Fruits","Tubers"],"a":"Legumes"}
+            ]
+        },
+        "Soil Management": {
+            "Soil Types": [
+                {"q":"Best soil for farming?","o":["Loam","Sand","Clay only","Rock"],"a":"Loam"},
+                {"q":"Soil erosion is caused by?","o":["Wind and water","Plastic","Metal","Fire"],"a":"Wind and water"}
+            ]
+        }
+    },
+
+    "Grade 8": {
+        "Livestock Production": {
+            "Animal Care": [
+                {"q":"Vaccination helps to?","o":["Prevent diseases","Increase weight instantly","Color animals","Make noise"],"a":"Prevent diseases"},
+                {"q":"Cows are mainly kept for?","o":["Milk and meat","Wool","Eggs","Honey"],"a":"Milk and meat"}
+            ]
+        },
+        "Farm Tools": {
+            "Tool Use": [
+                {"q":"Jembe is used for?","o":["Digging","Cutting trees","Spraying","Harvesting milk"],"a":"Digging"},
+                {"q":"A tractor is used for?","o":["Ploughing","Cooking","Cleaning house","Typing"],"a":"Ploughing"}
+            ]
+        }
+    },
+
+    "Grade 9": {
+        "Agribusiness": {
+            "Farm Economics": [
+                {"q":"Profit equals?","o":["Income minus expenses","Income plus expenses","Expenses only","Loss only"],"a":"Income minus expenses"},
+                {"q":"Marketing means?","o":["Selling products","Planting seeds","Watering crops","Weeding"],"a":"Selling products"}
+            ]
+        },
+        "Environmental Conservation": {
+            "Sustainable Farming": [
+                {"q":"Crop rotation helps to?","o":["Improve soil fertility","Destroy soil","Increase erosion","Reduce sunlight"],"a":"Improve soil fertility"},
+                {"q":"Agroforestry involves?","o":["Growing trees with crops","Cutting all trees","Burning farms","Mining soil"],"a":"Growing trees with crops"}
+            ]
+        }
+    }
+},
+
+"IRE":{
+  "grade 7"
+    "Foundations of Islam": [
+        {"q":"Islam means?","o":["Submission to Allah","Peace only","Prayer","Charity"],"a":"Submission to Allah"},
+        {"q":"Muslims believe in one?","o":["Allah","Angel","Prophet","Book"],"a":"Allah"},
+        {"q":"Holy book of Islam?","o":["Qur'an","Bible","Torah","Zabur"],"a":"Qur'an"}
+    ],
+
+    "Articles of Faith": [
+        {"q":"How many Articles of Faith are there?","o":["6","5","4","7"],"a":"6"},
+        {"q":"Belief in Angels is part of?","o":["Iman","Salah","Zakat","Hajj"],"a":"Iman"},
+        {"q":"Last Prophet of Islam?","o":["Muhammad (PBUH)","Isa","Musa","Ibrahim"],"a":"Muhammad (PBUH)"}
+    ]
+},
+
+# ================= GRADE 8 =================
+"Grade 8": {
+
+    "Five Pillars of Islam": [
+        {"q":"How many Pillars of Islam?","o":["5","6","4","7"],"a":"5"},
+        {"q":"Declaration of faith is called?","o":["Shahada","Salah","Zakat","Sawm"],"a":"Shahada"},
+        {"q":"Fasting in Ramadan is called?","o":["Sawm","Hajj","Zakat","Iman"],"a":"Sawm"}
+    ],
+
+    "Prayer (Salah)": [
+        {"q":"How many daily prayers?","o":["5","3","6","7"],"a":"5"},
+        {"q":"Direction of prayer?","o":["Qibla","East","North","Medina"],"a":"Qibla"},
+        {"q":"Call to prayer is called?","o":["Adhan","Iqama","Khutba","Dua"],"a":"Adhan"}
+    ]
+},
+
+# ================= GRADE 9 =================
+"Grade 9": {
+
+    "Prophets in Islam": [
+        {"q":"Prophet who built the Ark?","o":["Nuh (AS)","Musa (AS)","Isa (AS)","Yusuf (AS)"],"a":"Nuh (AS)"},
+        {"q":"Prophet given the Torah?","o":["Musa (AS)","Isa (AS)","Muhammad (PBUH)","Ibrahim (AS)"],"a":"Musa (AS)"},
+        {"q":"Prophet known for patience?","o":["Ayyub (AS)","Nuh (AS)","Yunus (AS)","Adam (AS)"],"a":"Ayyub (AS)"}
+    ],
+
+    "Islamic Morals": [
+        {"q":"Honesty in Islam is called?","o":["Amanah","Zakat","Hajj","Sawm"],"a":"Amanah"},
+        {"q":"Helping the poor is done through?","o":["Zakat","Salah","Shahada","Wudu"],"a":"Zakat"},
+        {"q":"Good character is called?","o":["Akhlaq","Fiqh","Hadith","Sunnah"],"a":"Akhlaq"}
+    ]
 }
+
 
 }
 
