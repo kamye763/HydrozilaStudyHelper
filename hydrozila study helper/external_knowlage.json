@@ -1,0 +1,21 @@
+{
+  "Integers": {
+    "large_negative_mix": {
+      "operation": "add_subtract",
+      "number_range": [-100, 100],
+      "steps": 3
+    },
+    "hard_multiplication": {
+      "operation": "multiply",
+      "number_range": [-20, 20],
+      "steps": 2
+    }
+  },
+  "Fractions": {
+    "complex_fraction_add": {
+      "operation": "fraction_add",
+      "number_range": [1, 20],
+      "steps": 2
+    }
+  }
+}
