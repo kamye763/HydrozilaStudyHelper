@@ -3,6 +3,8 @@ import json
 import os
 import random
 import subprocess
+import requests
+
 QUESTIONS_FILE = "questions.json"
 
 app = Flask(__name__)
@@ -604,6 +606,16 @@ def math_practice(grade, topic):
         topic=topic
     )
 
+@app.route("/mathpractice/<grade>/<topic>/get_question")
+def get_math_question(grade, topic):
+
+    fetch_external_patterns(topic)
+    skill = random.choice(list(QUESTION_BLUEPRINT.keys()))
+    question = generate_question_from_skill(skill)
+
+    return jsonify(question)
+
+
 
 # ----------------- GET RANDOM QUESTION (AJAX) -----------------
 
@@ -614,7 +626,6 @@ def get_math_question(grade, topic):
 
     if not topic_questions:
         return jsonify({"error": "No questions found"}), 404
-
     question = random.choice(topic_questions)
 
     return jsonify({
@@ -659,6 +670,77 @@ def quick_fire(grade):
         return redirect(url_for("login"))
 
     return render_template("quickfire.html", grade=grade)
+
+
+
+#=====================all ai funvtions========================
+
+
+#-----question blueprint route------------
+
+QUESTION_BLUEPRINT = {
+    " negative_addition":{
+        "operation": "add",
+        "number_range": [-20, 0],
+        "steps": 1
+    },
+    "multi_step":{
+        "operation": "add_subtract",
+        "number_range": [-50, 50],
+        "steps": 2
+    }
+}
+
+#--------online discovery-----------
+import json
+
+def fetch_external_patterns(topic):
+    """
+    Simulates fetching extra question patterns from an 'external knowledge server'.
+    Merges new patterns into QUESTION_BLUEPRINT.
+    """
+    try:
+        with open("external_knowledge.json") as f:
+            external_data = json.load(f)
+        
+        topic_data = external_data.get(topic, {})
+
+        for skill, pattern in topic_data.items():
+            # Merge into blueprint
+            QUESTION_BLUEPRINT[skill] = pattern
+
+    except FileNotFoundError:
+        print("External knowledge file not found")
+    except Exception as e:
+        print("Error loading external knowledge:", e)
+
+
+
+
+# ------------generate--------------
+
+def generate_question_from_skill(skill):
+    pattern = QUESTION_BLUEPRINT.get(skill)
+    if not pattern:
+        return None
+
+    op = pattern["operation"]
+    low, high = pattern["number_range"]
+    steps = pattern["steps"]
+
+    # Example: simple random numbers for addition
+    if op == "add":
+        nums = [random.randint(low, high) for _ in range(steps)]
+        question_text = " + ".join(map(str, nums))
+        answer = sum(nums)
+        return {
+            "question": f"Solve: {question_text}",
+            "choices": [answer, answer+1, answer-1, answer+2],
+            "answer": answer
+        }
+
+    # You can expand for other operations
+
 
 # ----------------- LOGOUT -----------------
 
