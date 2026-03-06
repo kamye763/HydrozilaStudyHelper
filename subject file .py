@@ -1,448 +1,455 @@
-import pygame
-import random
-import json
-import os
-import sys
 
-# ==========================================================
-# ====================== ENGINE =============================
-# ==========================================================
+{
+  "Agriculture": {
+    "Grade 7": {
+      "Crop Production": {
+        "Types of Crops": [
+          {
+            "question": "Maize is a type of?",
+            "choices": ["Cereal", "Fruit", "Flower", "Root"],
+            "answer": "Cereal",
+            "explanation": "Maize is classified as a cereal because it is a grass grown for its edible grain."
+          },
+          {
+            "question": "Beans are classified as?",
+            "choices": ["Legumes", "Cereals", "Fruits", "Tubers"],
+            "answer": "Legumes",
+            "explanation": "Beans belong to the legume family, which are plants that produce pods containing seeds."
+          }
+        ]
+      },
+      "Soil Management": {
+        "Soil Types": [
+          {
+            "question": "Best soil for farming?",
+            "choices": ["Loam", "Sand", "Clay", "Rock"],
+            "answer": "Loam",
+            "explanation": "Loam soil has a balanced mixture of sand, silt, and clay making it ideal for crops."
+          },
+          {
+            "question": "Soil erosion is caused by?",
+            "choices": ["Wind and water", "Plastic", "Metal", "Fire"],
+            "answer": "Wind and water",
+            "explanation": "Soil erosion occurs when wind or water removes the topsoil."
+          }
+        ]
+      },
+      "Cells": {
+        "Cell Structure": [
+          {
+            "question": "Basic unit of life?",
+            "choices": ["Cell", "Atom", "Organ", "Tissue"],
+            "answer": "Cell",
+            "explanation": "The cell is the smallest structural and functional unit of life."
+          },
+          {
+            "question": "Controls the cell?",
+            "choices": ["Nucleus", "Ribosome", "Vacuole", "Chloroplast"],
+            "answer": "Nucleus",
+            "explanation": "The nucleus controls cell activities and stores genetic material."
+          }
+        ]
+      }
+    },
+    "Grade 8": {
+      "Soil Management": {
+        "Soil Types": [
+          {
+            "question": "Which soil type is best for farming?",
+            "choices": ["Loam", "Sand", "Clay", "Rock"],
+            "answer": "Loam",
+            "explanation": "Loam soil has a balanced mixture of sand, silt, and clay making it ideal for crops."
+          },
+          {
+            "question": "Which soil drains water fastest?",
+            "choices": ["Sandy soil", "Clay soil", "Loam soil", "Peat soil"],
+            "answer": "Sandy soil",
+            "explanation": "Sandy soil has large particles that allow water to drain quickly."
+          },
+          {
+            "question": "Which soil holds the most water?",
+            "choices": ["Clay soil", "Sandy soil", "Gravel", "Silt"],
+            "answer": "Clay soil",
+            "explanation": "Clay soil particles are very small and hold water tightly."
+          },
+          {
+            "question": "Organic matter in soil is called?",
+            "choices": ["Humus", "Sand", "Salt", "Dust"],
+            "answer": "Humus",
+            "explanation": "Humus is decomposed plant and animal material in soil."
+          },
+          {
+            "question": "Which soil is easiest to cultivate?",
+            "choices": ["Loam", "Clay", "Rock", "Gravel"],
+            "answer": "Loam",
+            "explanation": "Loam soil is soft and fertile, making it easy to cultivate."
+          },
+          {
+            "question": "Soil erosion means?",
+            "choices": ["Wearing away of soil", "Planting crops", "Adding fertilizer", "Watering crops"],
+            "answer": "Wearing away of soil",
+            "explanation": "Soil erosion occurs when wind or water removes the topsoil."
+          },
+          {
+            "question": "Which agent causes soil erosion?",
+            "choices": ["Wind", "Water", "Animals", "All of these"],
+            "answer": "All of these",
+            "explanation": "Wind, water, and animals can all contribute to soil erosion."
+          },
+          {
+            "question": "Terracing helps to?",
+            "choices": ["Reduce erosion", "Increase erosion", "Kill crops", "Dry soil"],
+            "answer": "Reduce erosion",
+            "explanation": "Terraces slow water flow and prevent soil loss on slopes."
+          },
+          {
+            "question": "Planting trees helps to?",
+            "choices": ["Prevent erosion", "Increase erosion", "Destroy soil", "Dry soil"],
+            "answer": "Prevent erosion",
+            "explanation": "Tree roots hold soil together and prevent erosion."
+          },
+          {
+            "question": "Soil fertility means?",
+            "choices": ["Ability of soil to support plant growth", "Hard soil", "Dry soil", "Rock soil"],
+            "answer": "Ability of soil to support plant growth",
+            "explanation": "Fertile soil contains nutrients necessary for plant growth."
+          }
+        ]
+      }
+    },
+    "Grade 9": {
+      "Agribusiness": {
+        "Entrepreneurship": [
+          {
+            "question": "Who is an entrepreneur?",
+            "choices": ["A person who starts and runs a business", "A teacher", "A customer", "An employee only"],
+            "answer": "A person who starts and runs a business",
+            "explanation": "An entrepreneur creates and manages a business."
+          },
+          {
+            "question": "What is profit?",
+            "choices": ["Money gained after expenses", "Money lost", "Total sales only", "Money borrowed"],
+            "answer": "Money gained after expenses",
+            "explanation": "Profit is what remains after subtracting expenses from income."
+          },
+          {
+            "question": "What is a business plan?",
+            "choices": ["A written guide for running a business", "A school timetable", "A farm tool", "A market stall"],
+            "answer": "A written guide for running a business",
+            "explanation": "A business plan outlines goals and strategies for running a business."
+          },
+          {
+            "question": "Capital means?",
+            "choices": ["Money used to start a business", "Profit", "Loss", "Tax"],
+            "answer": "Money used to start a business",
+            "explanation": "Capital is the money required to begin a business."
+          },
+          {
+            "question": "Marketing means?",
+            "choices": ["Promoting and selling products", "Planting crops", "Watering plants", "Harvesting"],
+            "answer": "Promoting and selling products",
+            "explanation": "Marketing involves promoting and selling goods or services."
+          }
+        ]
+      }
+    }
+  },
+  "Science": {
+    "Grade 8": {
+      "Human Body": {
+        "Digestive System": [
+          {
+            "question": "Where does digestion begin?",
+            "choices": ["Mouth", "Stomach", "Liver", "Intestine"],
+            "answer": "Mouth",
+            "explanation": "Digestion begins in the mouth where food is chewed and mixed with saliva."
+          },
+          {
+            "question": "Which organ pumps blood?",
+            "choices": ["Heart", "Liver", "Kidney", "Brain"],
+            "answer": "Heart",
+            "explanation": "The heart pumps blood to all parts of the body."
+          },
+          {
+            "question": "Which organ helps in breathing?",
+            "choices": ["Lungs", "Heart", "Stomach", "Liver"],
+            "answer": "Lungs",
+            "explanation": "Lungs allow oxygen to enter the blood and remove carbon dioxide."
+          },
+          {
+            "question": "Where is food stored before digestion?",
+            "choices": ["Stomach", "Heart", "Liver", "Kidney"],
+            "answer": "Stomach",
+            "explanation": "The stomach stores and digests food using acids and enzymes."
+          },
+          {
+            "question": "Which organ absorbs nutrients?",
+            "choices": ["Small intestine", "Large intestine", "Stomach", "Kidney"],
+            "answer": "Small intestine",
+            "explanation": "The small intestine absorbs nutrients into the bloodstream."
+          },
+          {
+            "question": "Which organ removes waste water?",
+            "choices": ["Large intestine", "Stomach", "Heart", "Brain"],
+            "answer": "Large intestine",
+            "explanation": "The large intestine absorbs water and forms solid waste."
+          }
+        ]
+      }
+    }
+  }
+}
 
-class Engine:
-    def __init__(self, width=1200, height=700):
-        pygame.init()
-        pygame.mixer.init()
+SCIENCE_GRADE_9 = {
 
-        self.WIDTH = width
-        self.HEIGHT = height
-        self.screen = pygame.display.set_mode((width, height))
-        pygame.display.set_caption("CBC WARFARE SYSTEM")
+"Physics":{
 
-        self.clock = pygame.time.Clock()
-        self.running = True
-        self.active_scene = None
+"Force and Motion":[
 
-    def set_scene(self, scene):
-        self.active_scene = scene
+{
+"question":"What is force?",
+"choices":["Push or pull","Heat","Light","Sound"],
+"answer":"Push or pull",
+"explanation":"Force is any push or pull that can change motion."
+},
+{
+"question":"Unit of force?",
+"choices":["Newton","Joule","Watt","Volt"],
+"answer":"Newton",
+"explanation":"Force is measured in newtons."
+},
+{
+"question":"Gravity pulls objects?",
+"choices":["Toward Earth","Away from Earth","Sideways","Up only"],
+"answer":"Toward Earth",
+"explanation":"Gravity attracts objects toward the center of Earth."
+},
+{
+"question":"Speed equals?",
+"choices":["Distance divided by time","Time divided by distance","Mass times speed","Force divided by time"],
+"answer":"Distance divided by time",
+"explanation":"Speed measures how fast distance is covered."
+},
+{
+"question":"Friction causes?",
+"choices":["Resistance to motion","More speed","No movement change","Energy creation"],
+"answer":"Resistance to motion",
+"explanation":"Friction slows moving objects."
+},
 
-    def run(self):
-        while self.running:
-            self.clock.tick(60)
+{
+"question":"Energy unit?",
+"choices":["Joule","Newton","Volt","Ampere"],
+"answer":"Joule",
+"explanation":"Energy is measured in joules."
+},
+{
+"question":"Light travels fastest in?",
+"choices":["Vacuum","Water","Air","Glass"],
+"answer":"Vacuum",
+"explanation":"Light moves fastest where there is no medium."
+},
+{
+"question":"Sound travels through?",
+"choices":["Matter","Vacuum","Light","Nothing"],
+"answer":"Matter",
+"explanation":"Sound needs a medium like air or water."
+},
+{
+"question":"Heat transfer by contact?",
+"choices":["Conduction","Radiation","Reflection","Refraction"],
+"answer":"Conduction",
+"explanation":"Conduction transfers heat through direct contact."
+},
+{
+"question":"Heat transfer through waves?",
+"choices":["Radiation","Conduction","Convection","Reflection"],
+"answer":"Radiation",
+"explanation":"Radiation transfers heat through electromagnetic waves."
+},
 
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    self.running = False
-                if self.active_scene:
-                    self.active_scene.handle_event(event)
+{
+"question":"Motion means?",
+"choices":["Change of position","Standing still","Sleeping","Growing"],
+"answer":"Change of position",
+"explanation":"Motion occurs when an object changes its position."
+},
+{
+"question":"Balanced forces cause?",
+"choices":["No motion change","Acceleration","Falling","Jumping"],
+"answer":"No motion change",
+"explanation":"Balanced forces cancel each other."
+},
+{
+"question":"Unbalanced forces cause?",
+"choices":["Movement change","No motion","Rest only","Silence"],
+"answer":"Movement change",
+"explanation":"Unbalanced forces change motion."
+},
+{
+"question":"Energy stored in food?",
+"choices":["Chemical energy","Light energy","Sound energy","Wind energy"],
+"answer":"Chemical energy",
+"explanation":"Food contains chemical energy used by the body."
+},
+{
+"question":"Sun provides?",
+"choices":["Light and heat","Water","Air","Food"],
+"answer":"Light and heat",
+"explanation":"The Sun is the main source of energy for Earth."
+},
 
-            if self.active_scene:
-                self.active_scene.update()
-                self.active_scene.draw(self.screen)
+{
+"question":"Magnet attracts?",
+"choices":["Iron","Plastic","Wood","Paper"],
+"answer":"Iron",
+"explanation":"Magnets attract magnetic metals like iron."
+},
+{
+"question":"Opposite magnetic poles?",
+"choices":["Attract","Repel","Disappear","Break"],
+"answer":"Attract",
+"explanation":"North and south poles attract each other."
+},
+{
+"question":"Similar magnetic poles?",
+"choices":["Repel","Attract","Break","Disappear"],
+"answer":"Repel",
+"explanation":"Like poles push away from each other."
+},
+{
+"question":"Electric current flows through?",
+"choices":["Conductors","Insulators","Air only","Wood"],
+"answer":"Conductors",
+"explanation":"Conductors allow electricity to flow easily."
+},
+{
+"question":"Example of conductor?",
+"choices":["Copper","Plastic","Rubber","Glass"],
+"answer":"Copper",
+"explanation":"Copper is widely used in electrical wiring."
+}
 
-            pygame.display.update()
+]
 
-        pygame.quit()
-        sys.exit()
+}
 
-# ==========================================================
-# ====================== SAVE SYSTEM =======================
-# ==========================================================
+}
 
-class PlayerProfile:
-    FILE = "cbc_profile.json"
-
-    def __init__(self):
-        self.data = {
-            "xp": 0,
-            "level": 1,
-            "coins": 0,
-            "upgrades": {"damage": 0, "hp": 0},
-            "skills": {"critical": 0, "regen": 0, "energy_blast": 0},
-            "achievements": [],
-            "progress": {}
-        }
-        self.load()
-
-    def load(self):
-        if os.path.exists(self.FILE):
-            with open(self.FILE, "r") as f:
-                self.data.update(json.load(f))
-
-    def save(self):
-        with open(self.FILE, "w") as f:
-            json.dump(self.data, f, indent=4)
-
-    def add_xp(self, amount):
-        self.data["xp"] += amount
-        needed = self.data["level"] * 150
-        if self.data["xp"] >= needed:
-            self.data["xp"] -= needed
-            self.data["level"] += 1
-
-# ==========================================================
-# ====================== QUESTIONS =========================
-# ==========================================================
-
-QUESTIONS = {
-   # ==========================================================
-# 🔵 GRADE 7
-# ==========================================================
-
+creative_arts_and_sports = {
 "Grade 7": {
+    "Creative Arts": {
+      "Drawing and Painting": [
+        {"q":"What tool is mainly used for drawing?","o":["Pencil","Spoon","Plate","Cup"],"a":"Pencil"},
+        {"q":"Mixing red and yellow makes?","o":["Orange","Purple","Green","Blue"],"a":"Orange"},
+        {"q":"A drawing made using colors is called?","o":["Painting","Cooking","Building","Typing"],"a":"Painting"},
+        {"q":"Which surface is commonly used for drawing?","o":["Paper","Metal","Glass","Stone"],"a":"Paper"},
+        {"q":"Blue and yellow mixed make?","o":["Green","Red","Orange","Purple"],"a":"Green"}
+      ],
 
-    # -------- STRAND 1: DIGITAL LITERACY --------
-    "Digital Literacy": {
-
-        "Computer Parts": [
-            {"q":"Brain of the computer?","o":["CPU","Monitor","Mouse","Keyboard"],"a":"CPU"},
-            {"q":"Device used to type?","o":["Keyboard","Printer","Speaker","Scanner"],"a":"Keyboard"},
-            {"q":"Output device?","o":["Monitor","Mouse","CPU","RAM"],"a":"Monitor"}
-        ],
-
-        "Storage Devices": [
-            {"q":"Permanent storage?","o":["Hard Drive","RAM","Mouse","Fan"],"a":"Hard Drive"},
-            {"q":"RAM is?","o":["Temporary memory","Permanent memory","Printer","Software"],"a":"Temporary memory"}
-        ]
+      "Music and Dance": [
+        {"q":"A drum is a type of?","o":["Musical instrument","Vehicle","Food","Cloth"],"a":"Musical instrument"},
+        {"q":"Music with regular beats helps people to?","o":["Dance","Sleep always","Run away","Cry"],"a":"Dance"},
+        {"q":"Singing together in a group is called?","o":["Choir","Class","Team","Meeting"],"a":"Choir"},
+        {"q":"Traditional dances show?","o":["Culture","Weather","Mathematics","Transport"],"a":"Culture"},
+        {"q":"Clapping in music helps keep?","o":["Rhythm","Silence","Speed","Color"],"a":"Rhythm"}
+      ]
     },
 
-    # -------- STRAND 2: INTERNET SAFETY --------
-    "Internet Safety": {
+    "Sports": {
+      "Ball Games": [
+        {"q":"How many players are in a football team on the field?","o":["11","5","7","15"],"a":"11"},
+        {"q":"A ball is kicked mainly in?","o":["Football","Swimming","Running","Cycling"],"a":"Football"},
+        {"q":"Basketball is played using a?","o":["Hoop","Net only","Bat","Stick"],"a":"Hoop"},
+        {"q":"Throwing a ball to a teammate is called?","o":["Passing","Sleeping","Walking","Dancing"],"a":"Passing"},
+        {"q":"A referee's job is to?","o":["Enforce rules","Score goals","Sell tickets","Cook food"],"a":"Enforce rules"}
+      ],
 
-        "Online Security": [
-            {"q":"Strong password contains?","o":["Letters & symbols","Name only","Birthday","1234"],"a":"Letters & symbols"},
-            {"q":"Do not share your?","o":["Password","Homework","Book","Pen"],"a":"Password"}
-        ]
+      "Athletics": [
+        {"q":"Running fast over a short distance is called?","o":["Sprint","Swim","Climb","Jump"],"a":"Sprint"},
+        {"q":"A race around a track tests?","o":["Speed","Color","Cooking","Drawing"],"a":"Speed"},
+        {"q":"Jumping over a bar is called?","o":["High jump","Long run","Cycling","Rowing"],"a":"High jump"},
+        {"q":"Throwing a heavy metal ball is called?","o":["Shot put","Football","Tennis","Hockey"],"a":"Shot put"},
+        {"q":"Stretching before sports helps to?","o":["Prevent injuries","Sleep faster","Cook food","Paint"],"a":"Prevent injuries"}
+      ]
     }
-},
+  },
 
 
-# ==========================================================
-# 🟣 GRADE 8
-# ==========================================================
+  "Grade 8": {
+    "Creative Arts": {
+      "Craft and Design": [
+        {"q":"Making objects from clay is called?","o":["Pottery","Painting","Running","Typing"],"a":"Pottery"},
+        {"q":"Weaving is used to make?","o":["Baskets","Cars","Shoes","Tables"],"a":"Baskets"},
+        {"q":"Design means?","o":["Planning how something looks","Destroying things","Running fast","Cooking food"],"a":"Planning how something looks"},
+        {"q":"A pattern is?","o":["Repeated design","Random drawing","Music sound","Running race"],"a":"Repeated design"},
+        {"q":"Recycling materials in art helps to?","o":["Protect environment","Waste resources","Pollute air","Destroy art"],"a":"Protect environment"}
+      ],
 
-"Grade 8": {
-
-    # -------- STRAND 1: INTRO TO PROGRAMMING --------
-    "Programming Basics": {
-
-        "Variables & Output": [
-            {"q":"Used to store data?","o":["Variable","Loop","Mouse","CPU"],"a":"Variable"},
-            {"q":"print() does?","o":["Displays output","Deletes file","Shuts down PC","Saves file"],"a":"Displays output"}
-        ],
-
-        "Control Structures": [
-            {"q":"Loop is used to?","o":["Repeat code","Delete RAM","Fix PC","Create virus"],"a":"Repeat code"},
-            {"q":"If statement is used to?","o":["Make decisions","Draw pictures","Open browser","Install app"],"a":"Make decisions"}
-        ]
+      "Music": [
+        {"q":"The speed of music is called?","o":["Tempo","Color","Noise","Weight"],"a":"Tempo"},
+        {"q":"High and low sounds are called?","o":["Pitch","Taste","Heat","Light"],"a":"Pitch"},
+        {"q":"A group singing together is called?","o":["Choir","Band","Team","Class"],"a":"Choir"},
+        {"q":"Drums belong to which family?","o":["Percussion","Wind","String","Keyboard"],"a":"Percussion"},
+        {"q":"Reading musical notes helps to?","o":["Understand music","Cook food","Draw maps","Drive cars"],"a":"Understand music"}
+      ]
     },
 
-    # -------- STRAND 2: FILE MANAGEMENT --------
-    "File Management": {
+    "Sports": {
+      "Team Sports": [
+        {"q":"Passing helps a team to?","o":["Work together","Sleep","Lose game","Stop playing"],"a":"Work together"},
+        {"q":"Fair play means?","o":["Following rules","Cheating","Fighting","Ignoring referee"],"a":"Following rules"},
+        {"q":"The captain of a team does what?","o":["Leads the team","Sells food","Builds field","Cleans stadium"],"a":"Leads the team"},
+        {"q":"Volleyball is played over a?","o":["Net","Wall","River","Road"],"a":"Net"},
+        {"q":"Training regularly helps athletes to?","o":["Improve performance","Forget skills","Sleep more","Lose interest"],"a":"Improve performance"}
+      ],
 
-        "File Types": [
-            {"q":".docx is a?","o":["Document file","Image file","Video file","Audio file"],"a":"Document file"},
-            {"q":".jpg is a?","o":["Image file","Text file","Program file","Folder"],"a":"Image file"}
-        ]
+      "Physical Fitness": [
+        {"q":"Exercise helps improve?","o":["Health","Pollution","Noise","Traffic"],"a":"Health"},
+        {"q":"Warm-up prepares the body for?","o":["Exercise","Sleeping","Eating","Reading"],"a":"Exercise"},
+        {"q":"Running long distances improves?","o":["Endurance","Color","Taste","Drawing"],"a":"Endurance"},
+        {"q":"Push-ups mainly strengthen?","o":["Arms","Hair","Eyes","Nose"],"a":"Arms"},
+        {"q":"Drinking water during sports prevents?","o":["Dehydration","Sleep","Cold weather","Rain"],"a":"Dehydration"}
+      ]
     }
-},
+  },
 
 
-# ==========================================================
-# 🟢 GRADE 9
-# ==========================================================
+  "Grade 9": {
+    "Creative Arts": {
+      "Art Appreciation": [
+        {"q":"Art appreciation means?","o":["Understanding art","Destroying art","Selling food","Driving cars"],"a":"Understanding art"},
+        {"q":"A museum displays?","o":["Artworks","Food","Cars","Shoes"],"a":"Artworks"},
+        {"q":"An artist expresses ideas using?","o":["Art","Cooking","Running","Typing"],"a":"Art"},
+        {"q":"Sculpture is made by?","o":["Shaping materials","Painting walls","Running races","Reading books"],"a":"Shaping materials"},
+        {"q":"Famous artworks show?","o":["History and culture","Weather only","Sports scores","Cooking skills"],"a":"History and culture"}
+      ],
 
-"Grade 9": {
-
-    # -------- STRAND 1: ADVANCED CODING --------
-    "Programming Concepts": {
-
-        "Data Types": [
-            {"q":"Whole numbers are?","o":["Integers","Strings","Booleans","Files"],"a":"Integers"},
-            {"q":"True or False is?","o":["Boolean","Integer","Loop","Variable"],"a":"Boolean"}
-        ],
-
-        "Functions": [
-            {"q":"Function is used to?","o":["Reuse code","Delete system","Format disk","Close window"],"a":"Reuse code"},
-            {"q":"def is used to?","o":["Define function","Delete file","Debug PC","Download app"],"a":"Define function"}
-        ]
+      "Drama and Performance": [
+        {"q":"Acting in front of an audience is called?","o":["Drama","Running","Swimming","Cooking"],"a":"Drama"},
+        {"q":"The story of a play is called?","o":["Script","Recipe","Map","Song"],"a":"Script"},
+        {"q":"Actors perform on a?","o":["Stage","Road","River","Roof"],"a":"Stage"},
+        {"q":"Costumes help actors to?","o":["Show characters","Sleep","Run faster","Cook food"],"a":"Show characters"},
+        {"q":"Audience means?","o":["People watching","People sleeping","People cooking","People running"],"a":"People watching"}
+      ]
     },
 
-    # -------- STRAND 2: CYBER SECURITY --------
-    "Cyber Security": {
+    "Sports": {
+      "Sports Rules": [
+        {"q":"Rules in sports help to?","o":["Ensure fairness","Cause fights","Stop games","Confuse players"],"a":"Ensure fairness"},
+        {"q":"A foul means?","o":["Breaking a rule","Winning game","Starting match","Stopping play"],"a":"Breaking a rule"},
+        {"q":"A yellow card in football warns a?","o":["Player","Coach","Fan","Referee"],"a":"Player"},
+        {"q":"The referee controls the?","o":["Game","Food","Music","Weather"],"a":"Game"},
+        {"q":"Sportsmanship means?","o":["Respecting opponents","Cheating","Fighting","Ignoring rules"],"a":"Respecting opponents"}
+      ],
 
-        "Threats": [
-            {"q":"Phishing tries to?","o":["Steal information","Fix RAM","Boost speed","Clean disk"],"a":"Steal information"},
-            {"q":"Antivirus is used to?","o":["Remove malware","Increase RAM","Type faster","Create folder"],"a":"Remove malware"}
-        ]
+      "Sports Careers": [
+        {"q":"A person who trains athletes is called?","o":["Coach","Farmer","Doctor","Driver"],"a":"Coach"},
+        {"q":"Sports journalism involves?","o":["Reporting sports news","Cooking food","Selling shoes","Painting houses"],"a":"Reporting sports news"},
+        {"q":"A physiotherapist helps athletes to?","o":["Recover from injuries","Cook meals","Drive buses","Sing songs"],"a":"Recover from injuries"},
+        {"q":"Professional athletes earn money by?","o":["Competing in sports","Sleeping","Cooking","Drawing"],"a":"Competing in sports"},
+        {"q":"Sports management involves?","o":["Organizing sports events","Driving cars","Painting walls","Selling food"],"a":"Organizing sports events"}
+      ]
     }
+  }
 }
-
-
-"Grade 7": 
-        "Cells": [
-            {"q":"Basic unit of life?","o":["Cell","Atom","Organ","Tissue"],"a":"Cell"},
-            {"q":"Controls the cell?","o":["Nucleus","Ribosome","Vacuole","Chloroplast"],"a":"Nucleus"},
-            {"q":"Energy factory of cell?","o":["Mitochondria","Nucleus","Membrane","Cytoplasm"],"a":"Mitochondria"},
-            {"q":"Plant cells have?","o":["Cell wall","Fur","Bones","Wings"],"a":"Cell wall"},
-            {"q":"Photosynthesis occurs in?","o":["Chloroplast","Nucleus","Heart","Skin"],"a":"Chloroplast"},
-            {"q":"Cells form?","o":["Tissues","Planets","Atoms","Stars"],"a":"Tissues"}
-        ],
-
-        "Matter": [
-            {"q":"State with fixed shape?","o":["Solid","Liquid","Gas","Plasma"],"a":"Solid"},
-            {"q":"Boiling point of water?","o":["100°C","50°C","0°C","200°C"],"a":"100°C"},
-            {"q":"Density = Mass / ?","o":["Volume","Area","Weight","Energy"],"a":"Volume"},
-            {"q":"Negatively charged particle?","o":["Electron","Proton","Neutron","Photon"],"a":"Electron"},
-            {"q":"Smallest unit of element?","o":["Atom","Cell","Molecule","Organ"],"a":"Atom"},
-            {"q":"Air is a?","o":["Mixture","Element","Compound","Solid"],"a":"Mixture"}
-        ]
-    },
-
-    "Grade 8": 
-
-        "Human Body": [
-            {"q":"Pumps blood?","o":["Heart","Brain","Kidney","Lungs"],"a":"Heart"},
-            {"q":"Filters blood?","o":["Kidney","Liver","Heart","Lungs"],"a":"Kidney"},
-            {"q":"System that carries oxygen?","o":["Circulatory","Digestive","Skeletal","Excretory"],"a":"Circulatory"},
-            {"q":"Brain belongs to?","o":["Nervous","Digestive","Respiratory","Muscular"],"a":"Nervous"},
-            {"q":"Gas taken during breathing?","o":["Oxygen","Carbon","Nitrogen","Hydrogen"],"a":"Oxygen"}
-        ],
-
-        "Energy": [
-            {"q":"Energy cannot be created or?","o":["Destroyed","Moved","Measured","Seen"],"a":"Destroyed"},
-            {"q":"Unit of force?","o":["Newton","Watt","Volt","Joule"],"a":"Newton"},
-            {"q":"F=ma is?","o":["Newton's 2nd Law","Energy Law","Gravity Law","Motion Rule"],"a":"Newton's 2nd Law"},
-            {"q":"Stored energy?","o":["Potential","Kinetic","Heat","Light"],"a":"Potential"},
-            {"q":"Energy of motion?","o":["Kinetic","Potential","Chemical","Solar"],"a":"Kinetic"}
-        ]
-    },
-
-    "Grade 9": 
-
-        "Chemical Reactions": [
-            {"q":"Rusting needs?","o":["Oxygen","Hydrogen","Carbon","Nitrogen"],"a":"Oxygen"},
-            {"q":"pH less than 7 is?","o":["Acid","Base","Salt","Water"],"a":"Acid"},
-            {"q":"Neutral pH value?","o":["7","1","14","0"],"a":"7"},
-            {"q":"Burning is?","o":["Combustion","Freezing","Melting","Evaporation"],"a":"Combustion"},
-            {"q":"H2O is?","o":["Water","Oxygen","Hydrogen","Salt"],"a":"Water"}
-        ],
-
-        "Earth and Space": [
-            {"q":"Earth revolves around?","o":["Sun","Moon","Mars","Venus"],"a":"Sun"},
-            {"q":"Moon causes?","o":["Tides","Rain","Wind","Heat"],"a":"Tides"},
-            {"q":"Largest planet?","o":["Jupiter","Earth","Mars","Venus"],"a":"Jupiter"},
-            {"q":"Galaxy we live in?","o":["Milky Way","Andromeda","Orion","Pegasus"],"a":"Milky Way"},
-            {"q":"Earth rotation causes?","o":["Day and Night","Seasons","Rain","Tides"],"a":"Day and Night"}
-        ] # type: ignore
-    }
-}
-
-# ==========================================================
-# ====================== UI ================================
-# ==========================================================
-
-class Button:
-    def __init__(self, x, y, w, h, text):
-        self.rect = pygame.Rect(x,y,w,h)
-        self.text = text
-
-    def draw(self, screen):
-        pygame.draw.rect(screen,(170,0,255),self.rect, border_radius=10)
-        pygame.draw.rect(screen,(0,220,255),self.rect,2,border_radius=10)
-        font = pygame.font.Font(None,28)
-        txt = font.render(self.text,True,(255,255,255))
-        screen.blit(txt, txt.get_rect(center=self.rect.center))
-
-    def clicked(self,event):
-        return event.type == pygame.MOUSEBUTTONDOWN and self.rect.collidepoint(event.pos)
-
-# ==========================================================
-# ====================== MAIN MENU =========================
-# ==========================================================
-
-class MainMenu:
-    def __init__(self, engine, profile):
-        self.engine = engine
-        self.profile = profile
-
-        self.buttons = [
-            Button(400,250,400,70,"CRE"),
-            Button(400,350,400,70,"SCIENCE"),
-            Button(400,450,400,70,"PRETECH")
-        ]
-
-    def handle_event(self,event):
-        for b in self.buttons:
-            if b.clicked(event):
-                self.engine.set_scene(SubjectMenu(self.engine,self.profile,b.text))
-
-    def update(self): pass
-
-    def draw(self,screen):
-        screen.fill((20,10,50))
-        title = pygame.font.Font(None,60).render("CBC WARFARE",True,(0,255,255))
-        screen.blit(title,(350,150))
-        for b in self.buttons:
-            b.draw(screen)
-
-# ==========================================================
-# ====================== SUBJECT MENU ======================
-# ==========================================================
-
-class SubjectMenu:
-    def __init__(self,engine,profile,subject):
-        self.engine = engine
-        self.profile = profile
-        self.subject = subject
-        self.grade = "Grade 7"
-
-        self.buttons = []
-        y = 250
-        for strand in QUESTIONS[subject][self.grade]:
-            self.buttons.append(Button(350,y,500,70,strand))
-            y += 90
-
-    def handle_event(self,event):
-        for b in self.buttons:
-            if b.clicked(event):
-                self.engine.set_scene(
-                    BattleScene(self.engine,self.profile,self.subject,self.grade,b.text)
-                )
-
-    def update(self): pass
-
-    def draw(self,screen):
-        screen.fill((10,0,40))
-        title = pygame.font.Font(None,50).render(self.subject,True,(0,255,255))
-        screen.blit(title,(500,150))
-        for b in self.buttons:
-            b.draw(screen)
-
-# ==========================================================
-# ====================== BATTLE ============================
-# ==========================================================
-
-class BattleScene:
-    def __init__(self,engine,profile,subject,grade,strand):
-        self.engine = engine
-        self.profile = profile
-        self.subject = subject
-        self.grade = grade
-        self.strand = strand
-
-        self.q_list = QUESTIONS[subject][grade][strand]
-        self.index = 0
-
-        self.player_hp = 200 + profile.data["upgrades"]["hp"]
-        self.boss_hp = 400 + profile.data["level"] * 50
-
-        self.buttons = []
-        self.load_question()
-
-    def load_question(self):
-        q = self.q_list[self.index]
-        random.shuffle(q["o"])
-        self.buttons = []
-        for i,opt in enumerate(q["o"]):
-            self.buttons.append(Button(350,420+i*60,500,50,opt))
-
-    def handle_event(self,event):
-        for b in self.buttons:
-            if b.clicked(event):
-                self.answer(b.text)
-
-    def answer(self,choice):
-        correct = self.q_list[self.index]["a"]
-
-        if choice == correct:
-            dmg = 40 + self.profile.data["upgrades"]["damage"]
-            if random.random() < 0.1 + self.profile.data["skills"]["critical"]*0.05:
-                dmg *= 2
-            self.boss_hp -= dmg
-        else:
-            self.player_hp -= 35
-
-        self.index += 1
-
-        if self.index >= len(self.q_list) or self.boss_hp <= 0:
-            self.end_battle()
-        else:
-            self.load_question()
-
-    def end_battle(self):
-        self.profile.data["coins"] += 100
-        self.profile.add_xp(75)
-        self.profile.save()
-        self.engine.set_scene(ShopScene(self.engine,self.profile))
-
-    def update(self): pass
-
-    def draw(self,screen):
-        screen.fill((20,20,40))
-        pygame.draw.rect(screen,(0,220,255),(50,50,300*(self.player_hp/300),20))
-        pygame.draw.rect(screen,(170,0,255),(850,50,300*(self.boss_hp/800),20))
-        question = pygame.font.Font(None,30).render(
-            self.q_list[self.index]["q"],True,(255,255,255)
-        )
-        screen.blit(question,(350,350))
-        for b in self.buttons:
-            b.draw(screen)
-
-# ==========================================================
-# ====================== SHOP ==============================
-# ==========================================================
-
-class ShopScene:
-    def __init__(self,engine,profile):
-        self.engine = engine
-        self.profile = profile
-
-        self.items = [
-            ("+10 Damage",50,"damage"),
-            ("+20 HP",50,"hp"),
-            ("Critical Boost",80,"critical"),
-            ("Energy Blast",100,"energy_blast")
-        ]
-
-        self.buttons=[]
-        y=250
-        for name,cost,stat in self.items:
-            self.buttons.append(Button(300,y,600,60,f"{name} - {cost} coins"))
-            y+=80
-
-        self.return_btn=Button(400,600,400,60,"Return to Menu")
-
-    def handle_event(self,event):
-        for i,b in enumerate(self.buttons):
-            if b.clicked(event):
-                name,cost,stat=self.items[i]
-                if self.profile.data["coins"]>=cost:
-                    self.profile.data["coins"]-=cost
-                    if stat in self.profile.data["upgrades"]:
-                        self.profile.data["upgrades"][stat]+=10
-                    else:
-                        self.profile.data["skills"][stat]+=1
-                    self.profile.save()
-
-        if self.return_btn.clicked(event):
-            self.engine.set_scene(MainMenu(self.engine,self.profile))
-
-    def update(self): pass
-
-    def draw(self,screen):
-        screen.fill((30,0,60))
-        title=pygame.font.Font(None,50).render("TECH SHOP",True,(0,255,255))
-        screen.blit(title,(450,150))
-        for b in self.buttons:
-            b.draw(screen)
-        self.return_btn.draw(screen)
-
-# ==========================================================
-# ====================== START SYSTEM ======================
-# ==========================================================
-
-if __name__ == "__main__":
-    engine = Engine()
-    profile = PlayerProfile()
-    engine.set_scene(MainMenu(engine,profile))
-    engine.run()
