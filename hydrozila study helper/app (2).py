@@ -615,157 +615,466 @@ MathQUESTIONS = {
 print("MathQUESTIONS loaded:", MathQUESTIONS.keys())
 
 Pre_techQuestions = {
-    "7": {
-    "Workshop Safety": [
-        {
-            "question": "What is workshop safety?",
-            "choices": [
-                "Observing rules to prevent accidents",
-                "Working without supervision",
-                "Using tools quickly",
-                "Avoiding all machines"
-            ],
-            "answer": "Observing rules to prevent accidents",
-            "explanation": "Workshop safety involves following rules and precautions to prevent injuries."
-        },
-        {
-            "question": "Which of the following is personal protective equipment (PPE)?",
-            "choices": [
-                "Goggles",
-                "Notebook",
-                "Chair",
-                "Ruler"
-            ],
-            "answer": "Goggles",
-            "explanation": "Goggles protect the eyes from dust and flying particles."
-        }
-    ],
 
-    "Tools and Equipment": [
-        {
-            "question": "What is the function of a claw hammer?",
-            "choices": [
-                "Driving and removing nails",
-                "Measuring length",
-                "Cutting metal",
-                "Holding wood"
-            ],
-            "answer": "Driving and removing nails",
-            "explanation": "A claw hammer is used to drive nails in and pull them out."
-        },
-        {
-            "question": "Which tool is used to check a right angle?",
-            "choices": [
-                "Try square",
-                "Spanner",
-                "File",
-                "Chisel"
-            ],
-            "answer": "Try square",
-            "explanation": "A try square checks 90° angles."
-        }
-    ],
+"7": {
 
-    "Materials Technology": [
-        {
-            "question": "What is seasoning of timber?",
-            "choices": [
-                "Drying timber to remove moisture",
-                "Painting timber",
-                "Burning timber",
-                "Polishing timber"
-            ],
-            "answer": "Drying timber to remove moisture",
-            "explanation": "Seasoning removes moisture to make timber stronger and more durable."
-        },
-        {
-            "question": "Which metal is lightweight and resists corrosion?",
-            "choices": [
-                "Aluminium",
-                "Iron",
-                "Steel",
-                "Copper"
-            ],
-            "answer": "Aluminium",
-            "explanation": "Aluminium is light and does not rust easily."
-        }
-    ],
-
-    "Technical Drawing": [
-        {
-            "question": "What is a T-square used for?",
-            "choices": [
-                "Drawing horizontal lines",
-                "Cutting paper",
-                "Measuring angles",
-                "Sharpening pencils"
-            ],
-            "answer": "Drawing horizontal lines",
-            "explanation": "A T-square helps draw straight horizontal lines."
-        },
-        {
-            "question": "What does a 1:2 scale mean?",
-            "choices": [
-                "Drawing is half the real size",
-                "Drawing is double the real size",
-                "Drawing equals real size",
-                "Drawing is one-fourth size"
-            ],
-            "answer": "Drawing is half the real size",
-            "explanation": "1:2 means the drawing is reduced to half the actual size."
-        }
-    ],
-
-    "Basic Electricity": [
-        {
-            "question": "Which material is a conductor of electricity?",
-            "choices": [
-                "Copper",
-                "Rubber",
-                "Plastic",
-                "Wood"
-            ],
-            "answer": "Copper",
-            "explanation": "Copper allows electric current to pass through easily."
-        },
-        {
-            "question": "What is the function of a fuse?",
-            "choices": [
-                "Protect appliances from excess current",
-                "Store electricity",
-                "Increase voltage",
-                "Light a bulb"
-            ],
-            "answer": "Protect appliances from excess current",
-            "explanation": "A fuse melts when current is too high to prevent damage."
-        }
-    ],
-
-    "Entrepreneurship": [
-        {
-            "question": "Who is an entrepreneur?",
-            "choices": [
-                "A person who starts and runs a business",
-                "A teacher",
-                "A customer",
-                "An employee only"
-            ],
-            "answer": "A person who starts and runs a business",
-            "explanation": "An entrepreneur creates and manages a business."
-        },
-        {
-            "question": "What is profit?",
-            "choices": [
-                "Money gained after expenses",
-                "Money lost",
-                "Total sales only",
-                "Money borrowed"
-            ],
-            "answer": "Money gained after expenses",
-            "explanation": "Profit is what remains after subtracting expenses from income."
-        }
-    ]
+"Workshop Safety": [
+{
+"question": "What is workshop safety?",
+"choices": [
+"Observing rules to prevent accidents",
+"Working without supervision",
+"Using tools quickly",
+"Avoiding all machines"
+],
+"answer": "Observing rules to prevent accidents",
+"explanation": "Workshop safety involves following rules and precautions to prevent injuries."
+},
+{
+"question": "Which of the following is personal protective equipment (PPE)?",
+"choices": [
+"Goggles",
+"Notebook",
+"Chair",
+"Ruler"
+],
+"answer": "Goggles",
+"explanation": "Goggles protect the eyes from dust and flying particles."
 }
+],
+
+"Tools and Equipment": [
+{
+"question": "What is the function of a claw hammer?",
+"choices": [
+"Driving and removing nails",
+"Measuring length",
+"Cutting metal",
+"Holding wood"
+],
+"answer": "Driving and removing nails",
+"explanation": "A claw hammer is used to drive nails in and pull them out."
+},
+{
+"question": "Which tool is used to check a right angle?",
+"choices": [
+"Try square",
+"Spanner",
+"File",
+"Chisel"
+],
+"answer": "Try square",
+"explanation": "A try square checks 90° angles."
+}
+],
+
+"Materials Technology": [
+{
+"question": "What is seasoning of timber?",
+"choices": [
+"Drying timber to remove moisture",
+"Painting timber",
+"Burning timber",
+"Polishing timber"
+],
+"answer": "Drying timber to remove moisture",
+"explanation": "Seasoning removes moisture to make timber stronger and more durable."
+},
+{
+"question": "Which metal is lightweight and resists corrosion?",
+"choices": [
+"Aluminium",
+"Iron",
+"Steel",
+"Copper"
+],
+"answer": "Aluminium",
+"explanation": "Aluminium is light and does not rust easily."
+}
+],
+
+"Technical Drawing": [
+{
+"question": "What is a T-square used for?",
+"choices": [
+"Drawing horizontal lines",
+"Cutting paper",
+"Measuring angles",
+"Sharpening pencils"
+],
+"answer": "Drawing horizontal lines",
+"explanation": "A T-square helps draw straight horizontal lines."
+},
+{
+"question": "What does a 1:2 scale mean?",
+"choices": [
+"Drawing is half the real size",
+"Drawing is double the real size",
+"Drawing equals real size",
+"Drawing is one-fourth size"
+],
+"answer": "Drawing is half the real size",
+"explanation": "1:2 means the drawing is reduced to half the actual size."
+}
+],
+
+"Basic Electricity": [
+{
+"question": "Which material is a conductor of electricity?",
+"choices": [
+"Copper",
+"Rubber",
+"Plastic",
+"Wood"
+],
+"answer": "Copper",
+"explanation": "Copper allows electric current to pass through easily."
+},
+{
+"question": "What is the function of a fuse?",
+"choices": [
+"Protect appliances from excess current",
+"Store electricity",
+"Increase voltage",
+"Light a bulb"
+],
+"answer": "Protect appliances from excess current",
+"explanation": "A fuse melts when current is too high to prevent damage."
+}
+],
+
+"Entrepreneurship": [
+{
+"question": "Who is an entrepreneur?",
+"choices": [
+"A person who starts and runs a business",
+"A teacher",
+"A customer",
+"An employee only"
+],
+"answer": "A person who starts and runs a business",
+"explanation": "An entrepreneur creates and manages a business."
+},
+{
+"question": "What is profit?",
+"choices": [
+"Money gained after expenses",
+"Money lost",
+"Total sales only",
+"Money borrowed"
+],
+"answer": "Money gained after expenses",
+"explanation": "Profit is what remains after subtracting expenses from income."
+}
+]
+},
+
+"8": {
+
+"Workshop Safety": [
+{
+"question": "Why is it important to keep the workshop floor clean?",
+"choices": [
+"To prevent slipping and accidents",
+"To make it look beautiful",
+"To reduce noise",
+"To save electricity"
+],
+"answer": "To prevent slipping and accidents",
+"explanation": "Clean floors reduce the risk of slipping and injuries."
+},
+{
+"question": "Which symbol warns about electrical danger?",
+"choices": [
+"Lightning bolt symbol",
+"Circle symbol",
+"Star symbol",
+"Triangle with dot"
+],
+"answer": "Lightning bolt symbol",
+"explanation": "A lightning bolt symbol warns of electrical hazards."
+}
+],
+
+"Tools and Equipment": [
+{
+"question": "What is a spanner mainly used for?",
+"choices": [
+"Tightening and loosening nuts and bolts",
+"Cutting wood",
+"Measuring angles",
+"Holding materials"
+],
+"answer": "Tightening and loosening nuts and bolts",
+"explanation": "Spanners are used to turn nuts and bolts."
+},
+{
+"question": "Which tool is used for smoothing wood?",
+"choices": [
+"Plane",
+"Screwdriver",
+"Spanner",
+"Pliers"
+],
+"answer": "Plane",
+"explanation": "A plane smooths and flattens wooden surfaces."
+}
+],
+
+"Materials Technology": [
+{
+"question": "Which property allows a metal to be stretched into wire?",
+"choices": [
+"Ductility",
+"Hardness",
+"Brittleness",
+"Elasticity"
+],
+"answer": "Ductility",
+"explanation": "Ductility is the ability of a material to be drawn into wire."
+},
+{
+"question": "What is plastic mainly made from?",
+"choices": [
+"Petroleum",
+"Sand",
+"Wood",
+"Clay"
+],
+"answer": "Petroleum",
+"explanation": "Most plastics are produced from petroleum products."
+}
+],
+
+"Technical Drawing": [
+{
+"question": "Which instrument is used to draw circles?",
+"choices": [
+"Compass",
+"T-square",
+"Set square",
+"Protractor"
+],
+"answer": "Compass",
+"explanation": "A compass is used for drawing circles and arcs."
+},
+{
+"question": "Which drawing shows the top view of an object?",
+"choices": [
+"Plan",
+"Elevation",
+"Isometric",
+"Perspective"
+],
+"answer": "Plan",
+"explanation": "A plan represents the top view of an object."
+}
+],
+
+"Basic Electricity": [
+{
+"question": "What is a circuit?",
+"choices": [
+"A closed path for electricity to flow",
+"A type of battery",
+"A switch",
+"A light bulb"
+],
+"answer": "A closed path for electricity to flow",
+"explanation": "Electric current flows in a complete circuit."
+},
+{
+"question": "Which component controls the flow of electricity in a circuit?",
+"choices": [
+"Switch",
+"Wire",
+"Bulb",
+"Cell"
+],
+"answer": "Switch",
+"explanation": "A switch opens or closes the circuit."
+}
+],
+
+"Entrepreneurship": [
+{
+"question": "What is capital in business?",
+"choices": [
+"Money used to start or run a business",
+"Total sales",
+"Profit only",
+"Business name"
+],
+"answer": "Money used to start or run a business",
+"explanation": "Capital is the money invested in a business."
+},
+{
+"question": "Who is a customer?",
+"choices": [
+"A person who buys goods or services",
+"A business owner",
+"A manager",
+"A supplier"
+],
+"answer": "A person who buys goods or services",
+"explanation": "Customers purchase products or services."
+}
+]
+},
+
+"9": {
+
+"Workshop Safety": [
+{
+"question": "Why should machines be switched off before maintenance?",
+"choices": [
+"To prevent accidents",
+"To save time",
+"To reduce noise",
+"To increase speed"
+],
+"answer": "To prevent accidents",
+"explanation": "Switching off machines prevents accidental injuries."
+},
+{
+"question": "What should you do if a fire starts in the workshop?",
+"choices": [
+"Use a fire extinguisher",
+"Ignore it",
+"Run around",
+"Pour oil on it"
+],
+"answer": "Use a fire extinguisher",
+"explanation": "Fire extinguishers help control small fires safely."
+}
+],
+
+"Tools and Equipment": [
+{
+"question": "Which tool is used to cut metal sheets?",
+"choices": [
+"Tin snips",
+"Hammer",
+"Spanner",
+"Plane"
+],
+"answer": "Tin snips",
+"explanation": "Tin snips are designed for cutting sheet metal."
+},
+{
+"question": "Which tool holds work firmly while cutting?",
+"choices": [
+"Vice",
+"Hammer",
+"Screwdriver",
+"File"
+],
+"answer": "Vice",
+"explanation": "A vice grips materials securely during work."
+}
+],
+
+"Materials Technology": [
+{
+"question": "Which property describes a material's resistance to scratching?",
+"choices": [
+"Hardness",
+"Ductility",
+"Malleability",
+"Elasticity"
+],
+"answer": "Hardness",
+"explanation": "Hardness measures resistance to scratching or wear."
+},
+{
+"question": "Which material is commonly used as an electrical insulator?",
+"choices": [
+"Rubber",
+"Copper",
+"Aluminium",
+"Steel"
+],
+"answer": "Rubber",
+"explanation": "Rubber does not allow electricity to pass through easily."
+}
+],
+
+"Technical Drawing": [
+{
+"question": "What is isometric drawing?",
+"choices": [
+"A 3D representation of an object",
+"A top view only",
+"A side view only",
+"A curved drawing"
+],
+"answer": "A 3D representation of an object",
+"explanation": "Isometric drawings show three dimensions."
+},
+{
+"question": "Which instrument measures angles in drawing?",
+"choices": [
+"Protractor",
+"Compass",
+"T-square",
+"Ruler"
+],
+"answer": "Protractor",
+"explanation": "A protractor measures angles."
+}
+],
+
+"Basic Electricity": [
+{
+"question": "What unit measures electric current?",
+"choices": [
+"Ampere",
+"Volt",
+"Ohm",
+"Watt"
+],
+"answer": "Ampere",
+"explanation": "Electric current is measured in amperes."
+},
+{
+"question": "Which device converts electrical energy into light?",
+"choices": [
+"Bulb",
+"Battery",
+"Switch",
+"Fuse"
+],
+"answer": "Bulb",
+"explanation": "A bulb converts electricity into light energy."
+}
+],
+
+"Entrepreneurship": [
+{
+"question": "What is marketing?",
+"choices": [
+"Promoting and selling products",
+"Making tools",
+"Repairing machines",
+"Drawing designs"
+],
+"answer": "Promoting and selling products",
+"explanation": "Marketing involves advertising and selling goods."
+},
+{
+"question": "What is a business plan?",
+"choices": [
+"A written plan describing how a business will operate",
+"A list of workers",
+"A shop sign",
+"A bank account"
+],
+"answer": "A written plan describing how a business will operate",
+"explanation": "A business plan explains goals, strategies, and finances."
+}
+]
+}
+
 }
 
 
@@ -1104,7 +1413,7 @@ cre = {
   "Grade 7": {
         "Creation": {
             "Genesis": [
-                {"q":"Who created the world?","o":["God","Paul","David","Moses"],"a":"God"},
+                {"q":"Who created the world?", "o":["God","Paul","David","Moses"],"a":"God"},
                 {"q":"Created in how many days?","o":["6","7","3","10"],"a":"6"},
                 {"q":"Who created man?","o":["God","Jesus","Moses","David"],"a":"God"},
                 {"q":"Who created woman?","o":["God","Adam","Noah","Abraham"],"a":"God"},
