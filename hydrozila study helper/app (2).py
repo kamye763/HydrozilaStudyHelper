@@ -1234,178 +1234,158 @@ AgriQUESTIONS ={
       
   }
 
-intergratedsci_Questions ={
-      "Grade 7": {
-      "Cells": {
-        "Cell Structure": [
-          {
-            "question": "Basic unit of life?",
-            "choices": ["Cell", "Atom", "Organ", "Tissue"],
-            "answer": "Cell",
-            "explanation": "The cell is the smallest structural and functional unit of life."
-          },
-          {
-            "question": "Controls the cell?",
-            "choices": ["Nucleus", "Ribosome", "Vacuole", "Chloroplast"],
-            "answer": "Nucleus",
-            "explanation": "The nucleus controls cell activities and stores genetic material."
-          },
-          {
-            "question": "Which cell organelle makes energy?",
-            "choices": ["Mitochondria", "Ribosome", "Chloroplast", "Vacuole"],
-            "answer": "Mitochondria",
-            "explanation": "Mitochondria are the powerhouse of the cell."
-          },
-          {
-            "question": "Which organelle helps in photosynthesis?",
-            "choices": ["Chloroplast", "Nucleus", "Ribosome", "Lysosome"],
-            "answer": "Chloroplast",
-            "explanation": "Chloroplasts contain chlorophyll that captures sunlight for photosynthesis."
-          },
-          {
-            "question": "Stores water and nutrients in plant cells?",
-            "choices": ["Vacuole", "Ribosome", "Nucleus", "Mitochondria"],
-            "answer": "Vacuole",
-            "explanation": "Vacuoles store water, nutrients, and waste materials."
-          },
-          {
-            "question": "Helps in protein synthesis?",
-            "choices": ["Ribosome", "Nucleus", "Vacuole", "Chloroplast"],
-            "answer": "Ribosome",
-            "explanation": "Ribosomes assemble amino acids into proteins."
-          },
-          {
-            "question": "Protects the cell and gives it shape?",
-            "choices": ["Cell wall", "Cell membrane", "Nucleus", "Mitochondria"],
-            "answer": "Cell wall",
-            "explanation": "The cell wall provides protection and structure in plant cells."
-          },
-          {
-            "question": "Controls what enters and leaves the cell?",
-            "choices": ["Cell membrane", "Cell wall", "Nucleus", "Ribosome"],
-            "answer": "Cell membrane",
-            "explanation": "The cell membrane regulates movement of substances."
-          },
-          {
-            "question": "Breaks down waste materials in the cell?",
-            "choices": ["Lysosome", "Mitochondria", "Ribosome", "Nucleus"],
-            "answer": "Lysosome",
-            "explanation": "Lysosomes contain enzymes that digest waste."
-          },
-          {
-            "question": "Thread-like structures in the nucleus are called?",
-            "choices": ["Chromosomes", "Ribosomes", "Vacuoles", "Mitochondria"],
-            "answer": "Chromosomes",
-            "explanation": "Chromosomes carry genetic information in DNA."
-          },
-          {
-            "question": "Supports the cell internally?",
-            "choices": ["Cytoskeleton", "Nucleus", "Cell membrane", "Vacuole"],
-            "answer": "Cytoskeleton",
-            "explanation": "The cytoskeleton maintains cell shape and helps movement."
-          },
-          {
-            "question": "Site where chemical reactions occur in the cell?",
-            "choices": ["Cytoplasm", "Nucleus", "Vacuole", "Chloroplast"],
-            "answer": "Cytoplasm",
-            "explanation": "Most cellular reactions occur in the cytoplasm."
-          },
-          {
-            "question": "Which organelle stores genetic material?",
-            "choices": ["Nucleus", "Mitochondria", "Vacuole", "Lysosome"],
-            "answer": "Nucleus",
-            "explanation": "The nucleus stores DNA."
-          },
-          {
-            "question": "Which organelle is involved in cell division?",
-            "choices": ["Centrosome", "Ribosome", "Vacuole", "Mitochondria"],
-            "answer": "Centrosome",
-            "explanation": "The centrosome organizes microtubules during cell division."
-          },
-          {
-            "question": "Which structure forms the boundary of an animal cell?",
-            "choices": ["Cell membrane", "Cell wall", "Vacuole", "Chloroplast"],
-            "answer": "Cell membrane",
-            "explanation": "Animal cells are enclosed by a cell membrane."
-          },
-          {
-            "question": "Organelle that helps in detoxification?",
-            "choices": ["Peroxisome", "Mitochondria", "Ribosome", "Vacuole"],
-            "answer": "Peroxisome",
-            "explanation": "Peroxisomes break down harmful substances."
-          },
-          {
-            "question": "Which organelle contains enzymes to digest food?",
-            "choices": ["Lysosome", "Chloroplast", "Ribosome", "Nucleus"],
-            "answer": "Lysosome",
-            "explanation": "Lysosomes digest food and waste."
-          },
-          {
-            "question": "Which part of the cell gives plants their color?",
-            "choices": ["Chloroplast", "Nucleus", "Mitochondria", "Vacuole"],
-            "answer": "Chloroplast",
-            "explanation": "Chloroplasts contain green chlorophyll."
-          },
-          {
-            "question": "Which organelle packages proteins for transport?",
-            "choices": ["Golgi apparatus", "Ribosome", "Nucleus", "Vacuole"],
-            "answer": "Golgi apparatus",
-            "explanation": "The Golgi apparatus modifies and packages proteins."
-          },
-          {
-            "question": "Which organelle produces lipids and detoxifies drugs?",
-            "choices": ["Smooth endoplasmic reticulum", "Rough endoplasmic reticulum", "Mitochondria", "Lysosome"],
-            "answer": "Smooth endoplasmic reticulum",
-            "explanation": "Smooth ER produces lipids and detoxifies chemicals."
-          }
-        ]
-      }
-    },
+intergratedsci_Questions =  {
 
-    "Grade 8": {
-      "Human Body": {
-        "Digestive System": [
-          {
-            "question": "Where does digestion begin?",
-            "choices": ["Mouth", "Stomach", "Liver", "Intestine"],
-            "answer": "Mouth",
-            "explanation": "Digestion begins in the mouth."
-          },
-          {
-            "question": "Which organ pumps blood?",
-            "choices": ["Heart", "Liver", "Kidney", "Brain"],
-            "answer": "Heart",
-            "explanation": "The heart pumps blood around the body."
-          },
-          {
-            "question": "Which organ helps in breathing?",
-            "choices": ["Lungs", "Heart", "Stomach", "Liver"],
-            "answer": "Lungs",
-            "explanation": "Lungs exchange oxygen and carbon dioxide."
-          },
-          {
-            "question": "Where is food stored before digestion?",
-            "choices": ["Stomach", "Heart", "Liver", "Kidney"],
-            "answer": "Stomach",
-            "explanation": "The stomach temporarily stores and digests food."
-          },
-          {
-            "question": "Which organ absorbs nutrients?",
-            "choices": ["Small intestine", "Large intestine", "Stomach", "Kidney"],
-            "answer": "Small intestine",
-            "explanation": "The small intestine absorbs nutrients."
-          },
-          {
-            "question": "Which organ removes waste water?",
-            "choices": ["Large intestine", "Stomach", "Heart", "Brain"],
-            "answer": "Large intestine",
-            "explanation": "The large intestine absorbs water and forms feces."
-          }
-        ]
-      }
+  "Grade 7": {
+    "Cells": {
+      "Cell Structure": [
+        {
+          "question": "Basic unit of life?",
+          "choices": ["Cell", "Atom", "Organ", "Tissue"],
+          "answer": "Cell",
+          "explanation": "The cell is the smallest structural and functional unit of life."
+        },
+        {
+          "question": "Controls the cell?",
+          "choices": ["Nucleus", "Ribosome", "Vacuole", "Chloroplast"],
+          "answer": "Nucleus",
+          "explanation": "The nucleus controls cell activities and stores genetic material."
+        },
+        {
+          "question": "Which cell organelle makes energy?",
+          "choices": ["Mitochondria", "Ribosome", "Chloroplast", "Vacuole"],
+          "answer": "Mitochondria",
+          "explanation": "Mitochondria are the powerhouse of the cell."
+        },
+        {
+          "question": "Which organelle helps in photosynthesis?",
+          "choices": ["Chloroplast", "Nucleus", "Ribosome", "Lysosome"],
+          "answer": "Chloroplast",
+          "explanation": "Chloroplasts contain chlorophyll used for photosynthesis."
+        },
+        {
+          "question": "Stores water and nutrients in plant cells?",
+          "choices": ["Vacuole", "Ribosome", "Nucleus", "Mitochondria"],
+          "answer": "Vacuole",
+          "explanation": "The vacuole stores water, nutrients and waste materials."
+        }
+      ]
     }
-  }
+  },
 
+  "Grade 8": {
+    "Human Body": {
+      "Digestive System": [
+        {
+          "question": "Where does digestion begin?",
+          "choices": ["Mouth", "Stomach", "Liver", "Intestine"],
+          "answer": "Mouth",
+          "explanation": "Digestion begins in the mouth where food is chewed and mixed with saliva."
+        },
+        {
+          "question": "Which organ pumps blood?",
+          "choices": ["Heart", "Liver", "Kidney", "Brain"],
+          "answer": "Heart",
+          "explanation": "The heart pumps blood throughout the body."
+        },
+        {
+          "question": "Which organ helps in breathing?",
+          "choices": ["Lungs", "Heart", "Stomach", "Liver"],
+          "answer": "Lungs",
+          "explanation": "The lungs allow oxygen to enter the body and carbon dioxide to leave."
+        },
+        {
+          "question": "Where is food stored before digestion?",
+          "choices": ["Stomach", "Heart", "Liver", "Kidney"],
+          "answer": "Stomach",
+          "explanation": "The stomach stores food and mixes it with digestive juices."
+        },
+        {
+          "question": "Which organ absorbs nutrients?",
+          "choices": ["Small intestine", "Large intestine", "Stomach", "Kidney"],
+          "answer": "Small intestine",
+          "explanation": "Most nutrients are absorbed in the small intestine."
+        }
+      ]
+    }
+  },
+
+  "Grade 9": {
+    "Matter and Energy": {
+      "States of Matter": [
+        {
+          "question": "Which state of matter has definite shape and volume?",
+          "choices": ["Solid", "Liquid", "Gas", "Plasma"],
+          "answer": "Solid",
+          "explanation": "Solids have fixed shape and fixed volume."
+        },
+        {
+          "question": "Which state of matter takes the shape of its container but has fixed volume?",
+          "choices": ["Liquid", "Solid", "Gas", "Plasma"],
+          "answer": "Liquid",
+          "explanation": "Liquids have fixed volume but no fixed shape."
+        },
+        {
+          "question": "Which state of matter expands to fill the container?",
+          "choices": ["Gas", "Solid", "Liquid", "Crystal"],
+          "answer": "Gas",
+          "explanation": "Gases have no fixed shape or volume."
+        },
+        {
+          "question": "Change of a solid directly into gas is called?",
+          "choices": ["Sublimation", "Condensation", "Evaporation", "Melting"],
+          "answer": "Sublimation",
+          "explanation": "Sublimation occurs when a solid changes directly to gas."
+        },
+        {
+          "question": "Energy stored in food is called?",
+          "choices": ["Chemical energy", "Heat energy", "Light energy", "Sound energy"],
+          "answer": "Chemical energy",
+          "explanation": "Food stores energy in chemical form."
+        }
+      ]
+    }  
+  },  
+
+      "Forces and Motion": [
+        {
+          "question": "Force is measured using?",
+          "choices": ["Newton", "Joule", "Watt", "Volt"],
+          "answer": "Newton",
+          "explanation": "The SI unit of force is the Newton."
+        },
+        {
+          "question": "What force pulls objects toward the Earth?",
+          "choices": ["Gravity", "Magnetism", "Friction", "Electric force"],
+          "answer": "Gravity",
+          "explanation": "Gravity attracts objects toward the Earth."
+        },
+        {
+          "question": "Which force opposes motion?",
+          "choices": ["Friction", "Gravity", "Magnetism", "Electric force"],
+          "answer": "Friction",
+          "explanation": "Friction slows down moving objects."
+        },
+        {
+          "question": "Speed is calculated by?",
+          "choices": [
+            "Distance divided by time",
+            "Time divided by distance",
+            "Mass divided by time",
+            "Distance multiplied by time"
+          ],
+          "answer": "Distance divided by time",
+          "explanation": "Speed = Distance ÷ Time."
+        },
+        {
+          "question": "Energy of a moving object is called?",
+          "choices": ["Kinetic energy", "Potential energy", "Heat energy", "Chemical energy"],
+          "answer": "Kinetic energy",
+          "explanation": "Kinetic energy is the energy possessed by moving objects."
+        }
+      ]
+    }
+  
 
  
 
