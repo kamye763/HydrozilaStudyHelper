@@ -2,14 +2,40 @@ from flask import Flask, render_template, request, redirect, url_for, session, j
 import json
 import os
 import random
-import subprocess
-
-QUESTIONS_FILE = "questions.json"
+from werkzeug.security import check_password_hash
 
 app = Flask(__name__)
 app.secret_key = "secret123"
 
 DB_FILE = "user_database.json"
+QUESTION_FOLDER = "questions"
+
+
+# ---------------- USER DATABASE ----------------
+
+def load_users():
+    if os.path.exists(DB_FILE):
+        with open(DB_FILE) as f:
+            return json.load(f)
+    return {}
+
+
+def save_users(users):
+    with open(DB_FILE, "w") as f:
+        json.dump(users, f, indent=4)
+
+
+# ---------------- QUESTION LOADER ----------------
+
+def load_questions(subject, grade):
+    path = f"{QUESTION_FOLDER}/{subject}_grade{grade}.json"
+
+    if os.path.exists(path):
+        with open(path) as f:
+            return json.load(f)
+
+    return {}
+
 
 # ----------------- USER DATABASE FUNCTIONS -----------------
 
@@ -23,8 +49,33 @@ def save_users(users):
     with open(DB_FILE, "w") as f:
         json.dump(users, f, indent=4)
 
-#===================================Everything math========================
 
+# ----------------- HELPERS -----------------
+
+def complete_topic():
+    """Increment user level once."""
+    session["level"] = session.get("level", 1) + 1
+    return session["level"]
+
+def add_completed_topic(subject, topic):
+    """Mark a topic as completed for a given subject."""
+    completed = session.get("completed_topics", {})
+    completed.setdefault(subject, [])
+    if topic not in completed[subject]:
+        completed[subject].append(topic)
+    session["completed_topics"] = completed
+
+def get_unlocked_topics(subject, topics):
+    """Return list of unlocked topics based on previous completions."""
+    completed = session.get("completed_topics", {}).get(subject, [])
+    return [t for i, t in enumerate(topics) if i == 0 or topics[i-1] in completed]
+
+def check_boss_unlock(subject="Math", min_completed=5):
+    """Return True if enough topics completed to unlock boss battle."""
+    completed = session.get("completed_topics", {}).get(subject, [])
+    return len(completed) >= min_completed
+
+#===================================DICTIONARLIES================================
 
 MathQUESTIONS = {
     "7": {   # ← Grade 7 questions only
@@ -1379,131 +1430,198 @@ cre = {
   }
 
 
-# ----------------- LOGIN -----------------
+# ---------------- LOGIN ----------------
+
+from werkzeug.security import check_password_hash
 
 @app.route("/", methods=["GET", "POST"])
 def login():
+
     if request.method == "POST":
+
         users = load_users()
-        username = request.form["username"]
-        password = request.form["password"]
+        username = request.form.get("username")
+        password = request.form.get("password")
 
         if username in users and users[username]["password"] == password:
+
+            user_data = users[username]
+
             session["user"] = username
-            session["grade"] = users[username]["grade"]
+            session["grade"] = user_data.get("grade")
+
+            session["completed_topics"] = user_data.get("completed_topics", {
+                "Math": [],
+                "PreTech": [],
+                "Agriculture": [],
+                "Integrated Science": [],
+                "CRE": []
+            })
+
+            session["points"] = user_data.get("points", 0)
+            session["level"] = user_data.get("level", 1)
             session["score"] = 0
-            session["points"] = 0
-            session["level"] = 1
+
             return redirect(url_for("dashboard"))
 
-        return render_template("login.html", error="Wrong username or password")
+        return render_template("login.html", error="Invalid username or password")
 
     return render_template("login.html")
 
-# ----------------- REGISTER -----------------
 
-@app.route("/register", methods=["GET", "POST"])
-def register():
-    if request.method == "POST":
-        users = load_users()
-        username = request.form["username"]
-        password = request.form["password"]
-        grade = request.form["grade"]
-        level = 1
-
-        if username in users:
-            return render_template("register.html", error="Username already exists")
-
-        users[username] = {"password": password, "grade": grade, "level": level}
-        save_users(users)
-
-        return redirect(url_for("login"))
-
-    return render_template("register.html")
-
-# ----------------- DASHBOARD -----------------
+# ---------------- DASHBOARD ----------------
 
 @app.route("/dashboard")
 def dashboard():
+
     if "user" not in session:
         return redirect(url_for("login"))
 
-    points = session.get("points", 0)
-    score = session.get("score", 0)
-    level = session.get("level", 1)
-    
+    users = load_users()
+    username = session["user"]
+    user_data = users.get(username, {})
+
+    subjects = {
+        "Math": user_data.get("math", 0),
+        "Integrated Science": user_data.get("science", 0),
+        "Agriculture": user_data.get("agriculture", 0),
+        "PreTech": user_data.get("pretechnical", 0),
+        "CRE": user_data.get("cre", 0)
+    }
+
+    leaderboard = sorted(subjects.items(), key=lambda x: x[1], reverse=True)
 
     return render_template(
         "dashboard.html",
-        username=session.get("user"),
+        username=username,
         grade=session.get("grade"),
-        score=score,
-        points=points,
-        level=level
+        score=session.get("score", 0),
+        points=session.get("points", 0),
+        level=session.get("level", 1),
+        leaderboard=leaderboard
     )
 
-# ----------------- ADD POINTS (AJAX) -----------------
+
+# ---------------- ADD POINTS ----------------
 
 @app.route("/add_points", methods=["POST"])
 def add_points():
+
+    if "user" not in session:
+        return jsonify({"error": "Unauthorized"}), 401
+
     data = request.json
-    add = data.get("points", 0)
-    session["points"] = session.get("points", 0) + add
+    points_to_add = data.get("points", 0)
+
+    username = session["user"]
+    session["points"] = session.get("points", 0) + points_to_add
+
+    users = load_users()
+
+    if username in users:
+        users[username]["points"] = users[username].get("points", 0) + points_to_add
+        save_users(users)
+
     return jsonify({"points": session["points"]})
 
 
+# ---------------- SUBJECT CONFIG ----------------
 
-# ================================ MATH MAIN PAGE ========================================
+SUBJECTS = {
+    "math": MathQUESTIONS,
+    "pretech": Pre_techQuestions,
+    "agriculture": AgriQUESTIONS,
+    "integratedsci": intergratedsci_Questions
+}
 
-@app.route("/math")
-def math_page():
+SUBJECT_KEYS = {
+    "math": "Math",
+    "pretech": "PreTech",
+    "agriculture": "Agriculture",
+    "integratedsci": "Integrated Science"
+}
+
+
+# ---------------- SUBJECT PAGE ----------------
+
+@app.route("/<subject>")
+def subject_page(subject):
+
     if "user" not in session:
         return redirect(url_for("login"))
 
-    grade = session.get("grade")
-    topics = MathQUESTIONS.get(grade, {}).keys()
+    grade = str(session.get("grade"))
+
+    questions_dict = SUBJECTS.get(subject.lower(), {})
+    topics = list(questions_dict.get(grade, {}).keys())
+
+    template_map = {
+        "math": "math.html",
+        "pretech": "pretechpage.html",
+        "agriculture": "Agriculturepage.html",
+        "integratedsci": "intergratedscipage.html"
+    }
+
+    template = template_map.get(subject.lower(), "subject.html")
 
     return render_template(
-        "math.html",
+        template,
         grade=grade,
-        topics=topics
+        topics=topics,
+        subject=subject
     )
 
-# ----------------- MATH TOPICS PAGE -----------------
 
-@app.route("/math/<grade>/topics")
-def math_topics(grade):
+# ---------------- SUBJECT TOPICS ----------------
+
+@app.route("/<subject>/<grade>/topics")
+def subject_topics(subject, grade):
+
     if "user" not in session:
         return redirect(url_for("login"))
 
-    # Make sure grade is string
     grade = str(grade)
 
-    if grade not in MathQUESTIONS:
-        return "Grade not found", 404
+    questions_dict = SUBJECTS.get(subject.lower(), {})
+    topics = list(questions_dict.get(grade, {}).keys())
 
-    topics = list(MathQUESTIONS[grade].keys())
+    subj_key = SUBJECT_KEYS.get(subject.lower(), subject)
+    unlocked_topics = get_unlocked_topics(subj_key, topics)
+
+    template_map = {
+        "math": "math.html",
+        "pretech": "pretech.html",
+        "agriculture": "Agriculturepage.html",
+        "integratedsci": "intergratedscipage.html"
+    }
+
+    template = template_map.get(subject.lower(), "subject.html")
 
     return render_template(
-        "math.html",
+        template,
         grade=grade,
-        topics=topics
+        topics=topics,
+        unlocked_topics=unlocked_topics,
+        subject=subject
     )
 
-# ----------------- MATH PRACTICE PAGE -----------------
 
-@app.route("/mathpractice/<grade>/<topic>")
-def math_practice(grade, topic):
+# ---------------- PRACTICE PAGE ----------------
+
+@app.route("/practice/<subject>/<grade>/<topic>")
+def subject_practice(subject, grade, topic):
 
     if "user" not in session:
         return redirect(url_for("login"))
 
-    topic_questions = MathQUESTIONS.get(str(grade), {}).get(topic, [])
+    grade = str(grade)
+
+    questions_dict = SUBJECTS.get(subject.lower(), {})
+    topic_questions = questions_dict.get(grade, {}).get(topic, [])
 
     if not topic_questions:
-        return "No questions found for this topic", 404
-    
-    # shuffle questions
+        return f"No questions found for {topic}", 404
+
     shuffled = topic_questions.copy()
     random.shuffle(shuffled)
 
@@ -1511,346 +1629,33 @@ def math_practice(grade, topic):
     session["q_index"] = 0
     session["score"] = 0
 
+    template_map = {
+        "math": "mathpractice.html",
+        "pretech": "pretechpractice.html",
+        "agriculture": "agriculturepractice.html",
+        "integratedsci": "intergratedscipractice.html"
+    }
+
+    template = template_map.get(subject.lower(), "practice.html")
+
     return render_template(
-        "mathpractice.html",
+        template,
         grade=grade,
-        topic=topic
+        topic=topic,
+        subject=subject
     )
 
-@app.route("/mathpractice/<grade>/<topic>/get_question")
-def get_math_question(grade, topic):
+
+# ---------------- GET QUESTION (AJAX) ----------------
+
+@app.route("/practice/<subject>/<grade>/<topic>/get_question")
+def get_subject_question(subject, grade, topic):
 
     if "questions" not in session:
         return jsonify({"error": "No questions"}), 404
 
-    questions = session["questions"]
     index = session.get("q_index", 0)
-
-    if index >= len(questions):
-        return jsonify({"finished": True})
-
-    question = questions[index]
-    session["q_index"] = index + 1
-
-    return jsonify({
-        "question": question["question"],
-        "choices": question["choices"],
-        "answer": question["answer"],
-        "explanation": question.get("explanation", "")
-    })
-# ----------------- FINISH TEST -----------------
-
-@app.route("/mathpractice/<grade>/<topic>/finish", methods=["POST"])
-def finish_mathtest(grade, topic):
-
-    data = request.get_json()
-    percent = data.get("percent", 0)
-
-    passed = percent >= 70
-
-    if passed:
-        return redirect(url_for("start_boss"))
-
-    
-    return jsonify({
-        "passed": passed,
-        "percent": percent
-    })
-
-def complete_topic():
-    level = session.get("level", 1)
-    session["level"] = level + 1
-    return session["level"]
-
-# ----------------- boss battle route -----------------
-
-#-----route to redirect to boss battle topic one-----
-
-@app.route("/start_boss")
-def start_boss():
-    subprocess.Popen(["python", "boss battle 003.py"])
-    return "Boss battle started!"
-
-# ----------------- QUICK FIRE MODE -----------------
-
-@app.route("/quickfire/<grade>")
-def quick_fire(grade):
-
-    if "user" not in session:
-        return redirect(url_for("login"))
-
-    return render_template("quickfire.html", grade=grade)
-
-
-#============================================Everything Pretech======================================================
-
-#---------------------------------------loading the page------------------------------------------
-@app.route("/pretech")
-def pretech_page():
-    if "user" not in session:
-        return redirect(url_for("login"))
-
-    grade = session.get("grade")
-    topics = Pre_techQuestions.get(grade, {}).keys()
-
-    return render_template(
-        "pretechpage.html",
-        grade=grade,
-        topics=topics
-    )
-
-#-----------------------------------------PRETECH TOPICS PAGE------------------------------------------
-@app.route("/pretechpage/<grade>/topics")
-def pretech_topics(grade):
-    if "user" not in session:
-        return redirect(url_for("login"))
-     
-    grade = str(grade)
-    
-   
-    topics = list(Pre_techQuestions[grade].keys())
-
-    return render_template(
-        "pretechpage.html",
-        grade=grade,
-        topics=topics
-    )
-
-#-------------------------------------PRETECH PRACTICE PAGE----------------------------------------
-@app.route("/pretechpractice/<grade>/<topic>")
-def pretech_practice(grade, topic):
-
-    if "user" not in session:
-        return redirect(url_for("login"))
-
-    topic_questions = Pre_techQuestions.get(str(grade), {}).get(topic, [])
-
-    if not topic_questions:
-        return "No questions found for this topic", 404
-    
-    # shuffle questions
-    shuffled = topic_questions.copy()
-    random.shuffle(shuffled)
-
-    session["questions"] = shuffled
-    session["q_index"] = 0
-    session["score"] = 0
-
-    return render_template(
-        "pretechpractice.html",
-        grade=grade,
-        topic=topic
-    )
-
-@app.route("/pretechpractice/<grade>/<topic>/get_question")
-def get_pretech_question(grade, topic):
-
-    if "questions" not in session:
-        return jsonify({"error": "No questions"}), 404
-
     questions = session["questions"]
-    index = session.get("q_index", 0)
-
-    if index >= len(questions):
-        return jsonify({"finished": True})
-
-    question = questions[index]
-    session["q_index"] = index + 1
-
-    return jsonify({
-        "question": question["question"],
-        "choices": question["choices"],
-        "answer": question["answer"],
-        "explanation": question.get("explanation", "")
-    })
-# ----------------- FINISH TEST -----------------
-
-@app.route("/pretechpractice/<grade>/<topic>/finish", methods=["POST"])
-def finish_pretechtest(grade, topic):
-
-    data = request.get_json()
-    percent = data.get("percent", 0)
-
-    passed = percent >= 70
-
-    return jsonify({
-        "passed": passed,
-        "percent": percent
-    })
-def compleate_topic():
-    level = session.get("level", 1)
-    if level not in session:
-        session["level"] = 1
-
-    else:
-        session["level"] += 1
-
-    return session["level"]
-
-
-#=====================================EVERYTHING AGRICULTURE=============================================
-
-#---------------------------------------loading the page------------------------------------------
-@app.route("/Agriculture")
-def Agriculter_page():
-    if "user" not in session:
-        return redirect(url_for("login"))
-
-    grade = session.get("grade")
-    topics = AgriQUESTIONS.get(grade, {}).keys()
-
-    return render_template(
-        "Agriculture.html",
-        grade=grade,
-        topics=topics
-    )
-
-#-----------------------------------------AGRI TOPICS PAGE------------------------------------------
-@app.route("/Agriculture/<grade>/topics")
-def agriculture_topics(grade):
-    if "user" not in session:
-        return redirect(url_for("login"))
-     
-    grade = str(grade)
-    
-   
-    topics = list(AgriQUESTIONS[grade].keys())
-
-    return render_template(
-        "Agriculturepage.html",
-        grade=grade,
-        topics=topics
-    )
-
-#-------------------------------------AGRI PRACTICE PAGE----------------------------------------
-@app.route("/Agriculturepractice/<grade>/<topic>")
-def agriculture_practice(grade, topic):
-
-    if "user" not in session:
-        return redirect(url_for("login"))
-
-    topic_questions = AgriQUESTIONS.get(str(grade), {}).get(topic, [])
-
-    if not topic_questions:
-        return "No questions found for this topic", 404
-    
-    # shuffle questions
-    shuffled = topic_questions.copy()
-    random.shuffle(shuffled)
-
-    session["questions"] = shuffled
-    session["q_index"] = 0
-    session["score"] = 0
-
-    return render_template(
-        "agriculturepractice.html",
-        grade=grade,
-        topic=topic
-    )
-
-@app.route("/agriculturepractice/<grade>/<topic>/get_question")
-def get_agriculture_question(grade, topic):
-
-    if "questions" not in session:
-        return jsonify({"error": "No questions"}), 404
-
-    questions = session["questions"]
-    index = session.get("q_index", 0)
-
-    if index >= len(questions):
-        return jsonify({"finished": True})
-
-    question = questions[index]
-    session["q_index"] = index + 1
-
-    return jsonify({
-        "question": question["question"],
-        "choices": question["choices"],
-        "answer": question["answer"],
-        "explanation": question.get("explanation", "")
-    })
-# ----------------- FINISH TEST -----------------
-
-@app.route("/Agriculturepractice/<grade>/<topic>/finish", methods=["POST"])
-def finish_agritest(grade, topic):
-
-    data = request.get_json()
-    percent = data.get("percent", 0)
-
-    passed = percent >= 70
-
-    return jsonify({
-        "passed": passed,
-        "percent": percent
-    })
-
-#=====================================EVERYTHING INTERGRATED SCI========================================
-#---------------------------------------loading the page------------------------------------------
-@app.route("/IntegratedSci")
-def IntegratedSci_page():
-    if "user" not in session:
-        return redirect(url_for("login"))
-
-    grade = session.get("grade")
-    topics = intergratedsci_Questions.get(grade, {}).keys()
-
-    return render_template(
-        "integratedsci.html",
-        grade=grade,
-        topics=topics
-    )
-
-#-----------------------------------------SCI TOPICS PAGE------------------------------------------
-@app.route("/IntegratedSci/<grade>/topics")
-def intergratedsci_topics(grade):
-    if "user" not in session:
-        return redirect(url_for("login"))
-     
-    grade = str(grade)
-    
-   
-    topics = list(intergratedsci_Questions[grade].keys())
-
-    return render_template(
-        "intergratedscipage.html",
-        grade=grade,
-        topics=topics
-    )
-
-#-------------------------------------SCI PRACTICE PAGE----------------------------------------
-@app.route("/intergratedscipractice/<grade>/<topic>")
-def intergratedsci_practice(grade, topic):
-
-    if "user" not in session:
-        return redirect(url_for("login"))
-
-    topic_questions = intergratedsci_Questions.get(str(grade), {}).get(topic, [])
-
-    if not topic_questions:
-        return "No questions found for this topic", 404
-    
-    # shuffle questions
-    shuffled = topic_questions.copy()
-    random.shuffle(shuffled)
-
-    session["questions"] = shuffled
-    session["q_index"] = 0
-    session["score"] = 0
-
-    return render_template(
-        "intergratedscipractice.html",
-        grade=grade,
-        topic=topic
-    )
-
-@app.route("/intergratedscipractice/<grade>/<topic>/get_question")
-def get_intergratedsci_question(grade, topic):
-
-    if "questions" not in session:
-        return jsonify({"error": "No questions"}), 404
-
-    questions = session["questions"]
-    index = session.get("q_index", 0)
 
     if index >= len(questions):
         return jsonify({"finished": True})
@@ -1865,33 +1670,8 @@ def get_intergratedsci_question(grade, topic):
         "explanation": question.get("explanation", "")
     })
 
-# ----------------- FINISH TEST -----------------
 
-@app.route("/IntegratedScipractice/<grade>/<topic>/finish", methods=["POST"])
-def finish_integratedsci_test(grade, topic):
-
-    data = request.get_json()
-    percent = data.get("percent", 0)
-
-    passed = percent >= 70
-
-    return jsonify({
-        "passed": passed,
-        "percent": percent
-    })
-
-def complete_topic():
-    level = session.get("level", 1)
-    session["level"] = level + 1
-    return session["level"]
-# ----------------- LOGOUT -----------------
-
-@app.route("/logout")
-def logout():
-    session.clear()
-    return redirect(url_for("login"))
-
-# ----------------- RUN -----------------
+# ---------------- RUN APP ----------------
 
 if __name__ == "__main__":
     app.run(debug=True)
