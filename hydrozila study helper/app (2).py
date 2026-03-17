@@ -1234,9 +1234,9 @@ AgriQUESTIONS ={
       
   }
 
-intergratedsci_Questions =  {
+integratedsci_Questions = {
 
-  "Grade 7": {
+  "7": {
     "Cells": {
       "Cell Structure": [
         {
@@ -1249,125 +1249,145 @@ intergratedsci_Questions =  {
           "question": "Controls the cell?",
           "choices": ["Nucleus", "Ribosome", "Vacuole", "Chloroplast"],
           "answer": "Nucleus",
-          "explanation": "The nucleus controls cell activities and stores genetic material."
-        },
+          "explanation": "The nucleus controls cell activities."
+        }
+      ],
+      "Cell Functions": [
         {
-          "question": "Which cell organelle makes energy?",
-          "choices": ["Mitochondria", "Ribosome", "Chloroplast", "Vacuole"],
+          "question": "Which organelle produces energy?",
+          "choices": ["Mitochondria", "Ribosome", "Vacuole", "Nucleus"],
           "answer": "Mitochondria",
-          "explanation": "Mitochondria are the powerhouse of the cell."
+          "explanation": "Mitochondria produce energy for the cell."
         },
         {
-          "question": "Which organelle helps in photosynthesis?",
-          "choices": ["Chloroplast", "Nucleus", "Ribosome", "Lysosome"],
-          "answer": "Chloroplast",
-          "explanation": "Chloroplasts contain chlorophyll used for photosynthesis."
-        },
+          "question": "Which organelle makes proteins?",
+          "choices": ["Ribosome", "Chloroplast", "Nucleus", "Vacuole"],
+          "answer": "Ribosome",
+          "explanation": "Ribosomes are responsible for protein synthesis."
+        }
+      ]
+    },
+
+    "Environment": {
+      "Living and Non-living Things": [
         {
-          "question": "Stores water and nutrients in plant cells?",
-          "choices": ["Vacuole", "Ribosome", "Nucleus", "Mitochondria"],
-          "answer": "Vacuole",
-          "explanation": "The vacuole stores water, nutrients and waste materials."
+          "question": "Which is a living thing?",
+          "choices": ["Tree", "Rock", "Water", "Air"],
+          "answer": "Tree",
+          "explanation": "Living things grow, reproduce, and respond to stimuli."
+        }
+      ],
+      "Conservation": [
+        {
+          "question": "What is conservation?",
+          "choices": [
+            "Protection of environment",
+            "Destroying forests",
+            "Using resources carelessly",
+            "Ignoring pollution"
+          ],
+          "answer": "Protection of environment",
+          "explanation": "Conservation helps protect natural resources."
         }
       ]
     }
   },
 
-  "Grade 8": {
+  "8": {
     "Human Body": {
       "Digestive System": [
         {
           "question": "Where does digestion begin?",
           "choices": ["Mouth", "Stomach", "Liver", "Intestine"],
           "answer": "Mouth",
-          "explanation": "Digestion begins in the mouth where food is chewed and mixed with saliva."
-        },
-        {
-          "question": "Which organ pumps blood?",
-          "choices": ["Heart", "Liver", "Kidney", "Brain"],
-          "answer": "Heart",
-          "explanation": "The heart pumps blood throughout the body."
-        },
-        {
-          "question": "Which organ helps in breathing?",
-          "choices": ["Lungs", "Heart", "Stomach", "Liver"],
-          "answer": "Lungs",
-          "explanation": "The lungs allow oxygen to enter the body and carbon dioxide to leave."
-        },
-        {
-          "question": "Where is food stored before digestion?",
-          "choices": ["Stomach", "Heart", "Liver", "Kidney"],
-          "answer": "Stomach",
-          "explanation": "The stomach stores food and mixes it with digestive juices."
+          "explanation": "Digestion starts in the mouth."
         },
         {
           "question": "Which organ absorbs nutrients?",
           "choices": ["Small intestine", "Large intestine", "Stomach", "Kidney"],
           "answer": "Small intestine",
-          "explanation": "Most nutrients are absorbed in the small intestine."
+          "explanation": "Nutrients are absorbed in the small intestine."
+        }
+      ],
+      "Circulatory System": [
+        {
+          "question": "Which organ pumps blood?",
+          "choices": ["Heart", "Liver", "Kidney", "Brain"],
+          "answer": "Heart",
+          "explanation": "The heart pumps blood around the body."
+        }
+      ]
+    },
+
+    "Energy": {
+      "Forms of Energy": [
+        {
+          "question": "Energy from the sun is called?",
+          "choices": ["Solar energy", "Wind energy", "Chemical energy", "Sound energy"],
+          "answer": "Solar energy",
+          "explanation": "Solar energy comes from the sun."
+        }
+      ],
+      "Energy Conversion": [
+        {
+          "question": "What happens in energy conversion?",
+          "choices": [
+            "Energy changes form",
+            "Energy is destroyed",
+            "Energy disappears",
+            "Energy is unused"
+          ],
+          "answer": "Energy changes form",
+          "explanation": "Energy can change from one form to another."
         }
       ]
     }
   },
 
-  "Grade 9": {
+  "9": {
     "Matter and Energy": {
       "States of Matter": [
         {
-          "question": "Which state of matter has definite shape and volume?",
+          "question": "Which state has fixed shape and volume?",
           "choices": ["Solid", "Liquid", "Gas", "Plasma"],
           "answer": "Solid",
-          "explanation": "Solids have fixed shape and fixed volume."
+          "explanation": "Solids have fixed shape and volume."
         },
         {
-          "question": "Which state of matter takes the shape of its container but has fixed volume?",
-          "choices": ["Liquid", "Solid", "Gas", "Plasma"],
-          "answer": "Liquid",
-          "explanation": "Liquids have fixed volume but no fixed shape."
-        },
-        {
-          "question": "Which state of matter expands to fill the container?",
+          "question": "Which state fills its container?",
           "choices": ["Gas", "Solid", "Liquid", "Crystal"],
           "answer": "Gas",
-          "explanation": "Gases have no fixed shape or volume."
-        },
+          "explanation": "Gases expand to fill containers."
+        }
+      ],
+      "Changes in Matter": [
         {
-          "question": "Change of a solid directly into gas is called?",
-          "choices": ["Sublimation", "Condensation", "Evaporation", "Melting"],
+          "question": "Solid to gas is called?",
+          "choices": ["Sublimation", "Melting", "Condensation", "Freezing"],
           "answer": "Sublimation",
-          "explanation": "Sublimation occurs when a solid changes directly to gas."
-        },
-        {
-          "question": "Energy stored in food is called?",
-          "choices": ["Chemical energy", "Heat energy", "Light energy", "Sound energy"],
-          "answer": "Chemical energy",
-          "explanation": "Food stores energy in chemical form."
+          "explanation": "Sublimation is direct solid to gas change."
         }
       ]
-    }  
-  },  
+    },
 
-      "Forces and Motion": [
+    "Forces and Motion": {
+      "Forces": [
         {
-          "question": "Force is measured using?",
+          "question": "Force is measured in?",
           "choices": ["Newton", "Joule", "Watt", "Volt"],
           "answer": "Newton",
-          "explanation": "The SI unit of force is the Newton."
+          "explanation": "Force is measured in Newtons."
         },
         {
-          "question": "What force pulls objects toward the Earth?",
-          "choices": ["Gravity", "Magnetism", "Friction", "Electric force"],
+          "question": "Force that pulls objects to Earth?",
+          "choices": ["Gravity", "Friction", "Magnetism", "Electric force"],
           "answer": "Gravity",
-          "explanation": "Gravity attracts objects toward the Earth."
-        },
+          "explanation": "Gravity pulls objects toward Earth."
+        }
+      ],
+      "Motion": [
         {
-          "question": "Which force opposes motion?",
-          "choices": ["Friction", "Gravity", "Magnetism", "Electric force"],
-          "answer": "Friction",
-          "explanation": "Friction slows down moving objects."
-        },
-        {
-          "question": "Speed is calculated by?",
+          "question": "Speed is?",
           "choices": [
             "Distance divided by time",
             "Time divided by distance",
@@ -1375,18 +1395,19 @@ intergratedsci_Questions =  {
             "Distance multiplied by time"
           ],
           "answer": "Distance divided by time",
-          "explanation": "Speed = Distance ÷ Time."
+          "explanation": "Speed = distance ÷ time."
         },
         {
-          "question": "Energy of a moving object is called?",
+          "question": "Energy of motion is?",
           "choices": ["Kinetic energy", "Potential energy", "Heat energy", "Chemical energy"],
           "answer": "Kinetic energy",
-          "explanation": "Kinetic energy is the energy possessed by moving objects."
+          "explanation": "Kinetic energy is energy of moving objects."
         }
       ]
     }
-  
+  }
 
+}
  
 
 cre = {
