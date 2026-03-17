@@ -1234,181 +1234,252 @@ AgriQUESTIONS ={
       
   }
 
+import random
+
+def generate_questions(base_questions):
+    """Auto-expands to 15 questions if fewer provided"""
+    questions = []
+    while len(questions) < 15:
+        q = random.choice(base_questions)
+        questions.append(q.copy())
+    return questions
+
+
 integratedsci_Questions = {
 
   "7": {
     "Cells": {
-      "Cell Structure": [
-        {
-          "question": "Basic unit of life?",
-          "choices": ["Cell", "Atom", "Organ", "Tissue"],
-          "answer": "Cell",
-          "explanation": "The cell is the smallest structural and functional unit of life."
-        },
-        {
-          "question": "Controls the cell?",
-          "choices": ["Nucleus", "Ribosome", "Vacuole", "Chloroplast"],
-          "answer": "Nucleus",
-          "explanation": "The nucleus controls cell activities."
-        }
-      ],
-      "Cell Functions": [
-        {
-          "question": "Which organelle produces energy?",
-          "choices": ["Mitochondria", "Ribosome", "Vacuole", "Nucleus"],
-          "answer": "Mitochondria",
-          "explanation": "Mitochondria produce energy for the cell."
-        },
-        {
-          "question": "Which organelle makes proteins?",
-          "choices": ["Ribosome", "Chloroplast", "Nucleus", "Vacuole"],
-          "answer": "Ribosome",
-          "explanation": "Ribosomes are responsible for protein synthesis."
-        }
-      ]
+      "Cell Structure": generate_questions([
+        {"question": "Basic unit of life?", 
+         "choices": ["Cell","Atom","Organ","Tissue"], 
+         "answer": "Cell",
+         "explanation": "Cell is the smallest unit of life."},
+        {"question": "Controls the cell?", 
+         "choices": ["Nucleus","Ribosome","Vacuole","Chloroplast"], 
+         "answer": "Nucleus", 
+         "explanation": "The nucleus controls activities."},
+        {"question": "Outer boundary of cell?", 
+         "choices": ["Cell membrane","Cell wall","Cytoplasm","Nucleus"], 
+         "answer": "Cell membrane", 
+         "explanation": "Controls entry and exit."},
+        {"question": "Jelly-like substance?", 
+         "choices": ["Cytoplasm","Nucleus","Wall","Membrane"], 
+         "answer": "Cytoplasm", 
+         "explanation": "Holds organelles."},
+        {"question": "Plant support layer?", 
+         "choices": ["Cell wall","Membrane","Cytoplasm","Nucleus"], 
+         "answer": "Cell wall", 
+         "explanation": "Provides strength."}
+      ]),
+
+      "Cell Functions": generate_questions([
+        {"question": "Energy organelle?", 
+         "choices": ["Mitochondria","Ribosome","Nucleus","Vacuole"], 
+         "answer": "Mitochondria", 
+         "explanation": "Produces energy."},
+        {"question": "Protein synthesis?", 
+         "choices": ["Ribosome","Nucleus","Wall","Membrane"], 
+         "answer": "Ribosome", 
+         "explanation": "Makes proteins."},
+        {"question": "Photosynthesis organelle?", 
+         "choices": ["Chloroplast","Nucleus","Ribosome","Vacuole"], 
+         "answer": "Chloroplast", 
+         "explanation": "Uses sunlight."},
+        {"question": "Storage organelle?", 
+         "choices": ["Vacuole","Ribosome","Nucleus","Mitochondria"], 
+         "answer": "Vacuole", 
+         "explanation": "Stores materials."},
+        {"question": "Control center?", 
+         "choices": ["Nucleus","Membrane","Wall","Cytoplasm"], 
+         "answer": "Nucleus", 
+         "explanation": "Controls the cell."}
+      ])
     },
 
     "Environment": {
-      "Living and Non-living Things": [
-        {
-          "question": "Which is a living thing?",
-          "choices": ["Tree", "Rock", "Water", "Air"],
-          "answer": "Tree",
-          "explanation": "Living things grow, reproduce, and respond to stimuli."
-        }
-      ],
-      "Conservation": [
-        {
-          "question": "What is conservation?",
-          "choices": [
-            "Protection of environment",
-            "Destroying forests",
-            "Using resources carelessly",
-            "Ignoring pollution"
-          ],
-          "answer": "Protection of environment",
-          "explanation": "Conservation helps protect natural resources."
-        }
-      ]
+      "Living and Non-living": generate_questions([
+        {"question": "Living thing example?", 
+         "choices": ["Tree","Rock","Water","Air"], 
+         "answer": "Tree", 
+         "explanation": "It grows and reproduces."},
+        {"question": "Non-living thing?", 
+         "choices": ["Stone","Dog","Plant","Human"], 
+         "answer": "Stone", 
+         "explanation": "Does not grow."},
+        {"question": "Living things need?", 
+         "choices": ["Food","Plastic","Metal","Glass"], 
+         "answer": "Food", 
+         "explanation": "Provides energy."},
+        {"question": "Growth is?", 
+         "choices": ["Increase in size","Movement","Sleep","Death"], 
+         "answer": "Increase in size", 
+         "explanation": "Key feature of life."},
+        {"question": "Response to stimuli?", 
+         "choices": ["Sensitivity","Growth","Respiration","Excretion"], 
+         "answer": "Sensitivity", 
+         "explanation": "Reacting to environment."}
+      ]),
+
+      "Conservation": generate_questions([
+        {"question": "Conservation means?", 
+         "choices": ["Protection","Destruction","Pollution","Waste"], 
+         "answer": "Protection", 
+         "explanation": "Saving environment."},
+        {"question": "Reduce waste by?", 
+         "choices": ["Recycling","Burning","Dumping","Ignoring"], 
+         "answer": "Recycling", 
+         "explanation": "Reuses materials."},
+        {"question": "Cutting trees causes?", 
+         "choices": ["Deforestation","Growth","Rain","Oxygen"], 
+         "answer": "Deforestation", 
+         "explanation": "Loss of forests."},
+        {"question": "Clean environment gives?", 
+         "choices": ["Health","Disease","Pollution","Waste"], 
+         "answer": "Health", 
+         "explanation": "Prevents illness."},
+        {"question": "Save water by?", 
+         "choices": ["Turning taps off","Leaving open","Wasting","Ignoring"], 
+         "answer": "Turning taps off", 
+         "explanation": "Prevents waste."}
+      ])
     }
   },
 
   "8": {
     "Human Body": {
-      "Digestive System": [
-        {
-          "question": "Where does digestion begin?",
-          "choices": ["Mouth", "Stomach", "Liver", "Intestine"],
-          "answer": "Mouth",
-          "explanation": "Digestion starts in the mouth."
-        },
-        {
-          "question": "Which organ absorbs nutrients?",
-          "choices": ["Small intestine", "Large intestine", "Stomach", "Kidney"],
-          "answer": "Small intestine",
-          "explanation": "Nutrients are absorbed in the small intestine."
-        }
-      ],
-      "Circulatory System": [
-        {
-          "question": "Which organ pumps blood?",
-          "choices": ["Heart", "Liver", "Kidney", "Brain"],
-          "answer": "Heart",
-          "explanation": "The heart pumps blood around the body."
-        }
-      ]
+      "Digestive System": generate_questions([
+        {"question": "Digestion starts in?", 
+         "choices": ["Mouth","Stomach","Liver","Intestine"], 
+         "answer": "Mouth", 
+         "explanation": "Chewing begins digestion."},
+        {"question": "Food pipe?", 
+         "choices": ["Oesophagus","Trachea","Vein","Artery"], 
+         "answer": "Oesophagus", 
+         "explanation": "Carries food."},
+        {"question": "Main digestion organ?", 
+         "choices": ["Stomach","Heart","Kidney","Lungs"], 
+         "answer": "Stomach", 
+         "explanation": "Breaks food."},
+        {"question": "Absorbs nutrients?", 
+         "choices": ["Small intestine","Large intestine","Stomach","Liver"], 
+         "answer": "Small intestine", 
+         "explanation": "Absorbs nutrients."},
+        {"question": "Water absorption?", 
+         "choices": ["Large intestine","Small intestine","Stomach","Liver"], 
+         "answer": "Large intestine", 
+         "explanation": "Absorbs water."}
+      ]),
+
+      "Circulatory System": generate_questions([
+        {"question": "Pumps blood?", 
+         "choices": ["Heart","Liver","Kidney","Brain"], 
+         "answer": "Heart", 
+         "explanation": "Moves blood."},
+        {"question": "Blood vessels?", 
+         "choices": ["Arteries","Bones","Muscles","Skin"], 
+         "answer": "Arteries", 
+         "explanation": "Carry blood."},
+        {"question": "Oxygen transport?", 
+         "choices": ["Red blood cells","White cells","Platelets","Plasma"], 
+         "answer": "Red blood cells", 
+         "explanation": "Carry oxygen."},
+        {"question": "Clotting?", 
+         "choices": ["Platelets","RBC","WBC","Plasma"], 
+         "answer": "Platelets", 
+         "explanation": "Stops bleeding."},
+        {"question": "Defense cells?", 
+         "choices": ["White blood cells","Red cells","Platelets","Plasma"], 
+         "answer": "White blood cells", 
+         "explanation": "Fight disease."}
+      ])
     },
 
     "Energy": {
-      "Forms of Energy": [
-        {
-          "question": "Energy from the sun is called?",
-          "choices": ["Solar energy", "Wind energy", "Chemical energy", "Sound energy"],
-          "answer": "Solar energy",
-          "explanation": "Solar energy comes from the sun."
-        }
-      ],
-      "Energy Conversion": [
-        {
-          "question": "What happens in energy conversion?",
-          "choices": [
-            "Energy changes form",
-            "Energy is destroyed",
-            "Energy disappears",
-            "Energy is unused"
-          ],
-          "answer": "Energy changes form",
-          "explanation": "Energy can change from one form to another."
-        }
-      ]
+      "Forms of Energy": generate_questions([
+        {"question": "Sun energy?", 
+         "choices": ["Solar","Wind","Chemical","Sound"], 
+         "answer": "Solar", 
+         "explanation": "From sun."},
+        {"question": "Movement energy?", 
+         "choices": ["Kinetic","Potential","Heat","Sound"], 
+         "answer": "Kinetic", 
+         "explanation": "Energy of motion."},
+        {"question": "Stored energy?", 
+         "choices": ["Potential","Kinetic","Light","Sound"], 
+         "answer": "Potential", 
+         "explanation": "Stored energy."},
+        {"question": "Sound energy?", 
+         "choices": ["Vibrations","Light","Heat","Wind"], 
+         "answer": "Vibrations", 
+         "explanation": "From vibration."},
+        {"question": "Heat energy?", 
+         "choices": ["Thermal","Light","Sound","Wind"], 
+         "answer": "Thermal", 
+         "explanation": "Energy of heat."}
+      ]),
+
+      "Energy Conversion": generate_questions([
+        {"question": "Energy change is?", "choices": ["Conversion","Loss","Waste","Damage"], "answer": "Conversion", "explanation": "Changes form."},
+        {"question": "Battery gives?", "choices": ["Chemical to electrical","Light to heat","Sound to light","Heat to sound"], "answer": "Chemical to electrical", "explanation": "Energy conversion."},
+        {"question": "Bulb converts?", "choices": ["Electrical to light","Heat to sound","Light to heat","Chemical to sound"], "answer": "Electrical to light", "explanation": "Produces light."},
+        {"question": "Energy cannot be?", "choices": ["Destroyed","Used","Stored","Transferred"], "answer": "Destroyed", "explanation": "Law of conservation."},
+        {"question": "Food energy?", "choices": ["Chemical","Light","Heat","Sound"], "answer": "Chemical", "explanation": "Stored in food."}
+      ])
     }
   },
 
   "9": {
     "Matter and Energy": {
-      "States of Matter": [
-        {
-          "question": "Which state has fixed shape and volume?",
-          "choices": ["Solid", "Liquid", "Gas", "Plasma"],
-          "answer": "Solid",
-          "explanation": "Solids have fixed shape and volume."
-        },
-        {
-          "question": "Which state fills its container?",
-          "choices": ["Gas", "Solid", "Liquid", "Crystal"],
-          "answer": "Gas",
-          "explanation": "Gases expand to fill containers."
-        }
-      ],
-      "Changes in Matter": [
-        {
-          "question": "Solid to gas is called?",
-          "choices": ["Sublimation", "Melting", "Condensation", "Freezing"],
-          "answer": "Sublimation",
-          "explanation": "Sublimation is direct solid to gas change."
-        }
-      ]
+      "States of Matter": generate_questions([
+        {"question": "Fixed shape?", 
+         "choices": ["Solid","Liquid","Gas","Plasma"], 
+         "answer": "Solid", 
+         "explanation": "Fixed shape and volume."},
+        {"question": "Takes container shape?", 
+         "choices": ["Liquid","Solid","Gas","Crystal"], 
+         "answer": "Liquid", "explanation": "Fixed volume."},
+        {"question": "Fills container?", 
+         "choices": ["Gas","Solid","Liquid","Ice"], 
+         "answer": "Gas", "explanation": "Expands fully."},
+        {"question": "Solid to gas?", 
+         "choices": ["Sublimation","Melting","Freezing","Condensation"], 
+         "answer": "Sublimation", "explanation": "Direct change."},
+        {"question": "Gas to liquid?", 
+         "choices": ["Condensation","Evaporation","Freezing","Melting"], 
+         "answer": "Condensation", "explanation": "Cooling gas."}
+      ])
     },
 
     "Forces and Motion": {
-      "Forces": [
-        {
-          "question": "Force is measured in?",
-          "choices": ["Newton", "Joule", "Watt", "Volt"],
-          "answer": "Newton",
-          "explanation": "Force is measured in Newtons."
-        },
-        {
-          "question": "Force that pulls objects to Earth?",
-          "choices": ["Gravity", "Friction", "Magnetism", "Electric force"],
-          "answer": "Gravity",
-          "explanation": "Gravity pulls objects toward Earth."
-        }
-      ],
-      "Motion": [
-        {
-          "question": "Speed is?",
-          "choices": [
-            "Distance divided by time",
-            "Time divided by distance",
-            "Mass divided by time",
-            "Distance multiplied by time"
-          ],
-          "answer": "Distance divided by time",
-          "explanation": "Speed = distance ÷ time."
-        },
-        {
-          "question": "Energy of motion is?",
-          "choices": ["Kinetic energy", "Potential energy", "Heat energy", "Chemical energy"],
-          "answer": "Kinetic energy",
-          "explanation": "Kinetic energy is energy of moving objects."
-        }
-      ]
+      "Forces": generate_questions([
+        {"question": "Unit of force?", 
+         "choices": ["Newton","Joule","Watt","Volt"], "answer": "Newton", "explanation": "SI unit."},
+        {"question": "Pull to Earth?", 
+         "choices": ["Gravity","Friction","Magnetism","Electric"], "answer": "Gravity", "explanation": "Attractive force."},
+        {"question": "Opposes motion?", 
+         "choices": ["Friction","Gravity","Magnetism","Electric"], "answer": "Friction", "explanation": "Slows objects."},
+        {"question": "Magnetic force acts on?", 
+         "choices": ["Metals","Water","Air","Plastic"], "answer": "Metals", "explanation": "Magnetic materials."},
+        {"question": "Push or pull?", 
+         "choices": ["Force","Energy","Mass","Speed"], "answer": "Force", "explanation": "Definition."}
+      ]),
+
+      "Motion": generate_questions([
+        {"question": "Speed formula?", 
+         "choices": ["Distance/time","Time/distance","Mass/time","Distance×time"], "answer": "Distance/time", "explanation": "Basic formula."},
+        {"question": "Energy of motion?", 
+         "choices": ["Kinetic","Potential","Heat","Sound"], "answer": "Kinetic", "explanation": "Moving energy."},
+        {"question": "At rest?", 
+         "choices": ["No motion","Fast","Slow","Energy"], "answer": "No motion", "explanation": "Not moving."},
+        {"question": "Change in position?", 
+         "choices": ["Motion","Force","Energy","Mass"], "answer": "Motion", "explanation": "Definition."},
+        {"question": "Speed unit?", 
+         "choices": ["m/s","kg","N","J"], "answer": "m/s", "explanation": "Meters per second."}
+      ])
     }
   }
 
 }
- 
 
 cre = {
   "Grade 7": {
